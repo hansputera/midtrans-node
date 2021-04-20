@@ -1,0 +1,3 @@
+# Ignoring interfaces and definitions
+src/Interfaces/*.d.ts
+src/Definitions/*d.ts

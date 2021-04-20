@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "pretty": true,
+        "outDir": "./compiles",
+        "target": "ES6",
+        "module": "CommonJS",
+        "resolveJsonModule": true
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*"]
+}
