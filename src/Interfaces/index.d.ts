@@ -8,3 +8,4 @@ export * from "./Transaction";
 export * from "./Refund";
 export * from "./SnapTransaction";
 export * from "./Beneficiaries";
+export * from "./Statements";

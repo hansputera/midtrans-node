@@ -6,7 +6,7 @@ export default function IrisRequest(isProduction: boolean): AxiosInstance {
     return axios.create({
         baseURL,
         headers:{
-            'User-Agent': 'Midtrans-Node/' + version
+            "User-Agent": "Midtrans-Node/" + version
         }
     });
 }

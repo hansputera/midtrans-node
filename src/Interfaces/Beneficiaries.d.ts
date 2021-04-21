@@ -9,5 +9,5 @@ export interface IBeneficiaries
 
 export interface ISuccessBeneficiaries
 {
-    status: "created";
+    status: "created" | "updated";
 }
