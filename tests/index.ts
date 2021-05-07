@@ -1,5 +1,5 @@
 import Midtrans from "../src/index";
-const midtrans = new Midtrans(false, "YOUR MIDTRANS SERVER KEY");
+const midtrans = new Midtrans(false, "SB-Mid-server-FsNBPE2_N_jhsgmWaJcieiVR");
 
 midtrans.createTransaction({
     transaction_details: {

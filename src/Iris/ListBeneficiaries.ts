@@ -1,10 +1,10 @@
 import type { IBeneficiaries } from "../Interfaces";
 import IrisRequest from "../Util/IrisRequest";
 
-export default async function ListBeneficiaries(isProduction: boolean, limit = 0): Promise<IBeneficiaries[] | undefined>
+export default async function ListBeneficiaries(isProduction: boolean, limit = 0, token: string): Promise<IBeneficiaries[] | undefined>
 {
     try {
-        const { data }:{ data: IBeneficiaries[]; } = await IrisRequest(isProduction).get("/beneficiaries");
+        const { data }:{ data: IBeneficiaries[]; } = await IrisRequest(isProduction, token).get("/beneficiaries");
         return data.splice(0, limit);
     } catch  {
         return undefined;

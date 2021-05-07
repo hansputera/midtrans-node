@@ -49,7 +49,7 @@ const validDate = (d: IStatementDate) =>
     else if (!/[0-9]/g.test(d.days.toString())) throw new MidtransNodeError("Invalid days date");
 };
 
-export default async function HistoryTransaction(isProduction: boolean, fromDate?: IStatementDate, toDate?: IStatementDate): Promise<IStatementResult[] | undefined>
+export default async function HistoryTransaction(isProduction: boolean, fromDate?: IStatementDate, toDate?: IStatementDate, token?: string): Promise<IStatementResult[] | undefined>
 {
     if (!fromDate && !toDate) {
         fromDate = struDate;
@@ -76,7 +76,7 @@ export default async function HistoryTransaction(isProduction: boolean, fromDate
     const isoFromDate = fromDate._date.toISODate();
     const isoToDate = toDate._date.toISODate();
     try {
-        const { data }:{ data: IStatementResult[]; } = await IrisRequest(isProduction).get("/statements", {
+        const { data }:{ data: IStatementResult[]; } = await IrisRequest(isProduction, token).get("/statements", {
             data: {
                 from_date: isoFromDate,
                 to_date: isoToDate
