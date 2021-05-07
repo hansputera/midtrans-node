@@ -37,10 +37,18 @@ import { version } from "../package.json";
 import type { SnapTransaction, IRefundObjRequest, IRegisterCardRequest, ICreatePayAccount, ICreateSubcription, IUpdateSubcription, IBeneficiaries, IStatementDate, ITransaction, ITransactionFail, IRefundObj, ITransactionStatus, IRegisterCardResponse, IPointInquiry, ICreatePayAccountResponse, IPayAccount, IPayAccountUnBind, BinApiResponse, ISubcription, ISuccessBeneficiaries, IStatementResult, ITopupAggreratorChannel, BankAccount, ICheckBalanceBank, BeneficiaryBank, IValidateBankResult } from "./Interfaces";
 import { IPayoutRequest, IPayoutApproveRequest, IPayoutRejectRequest, IPayoutCreateResponse, IPayoutSuccessAct, IPayout } from "./Interfaces/Payouts";
 
+/**
+ * 
+ * @class MidtransNode Main class for midtrans-node.
+ */
 class MidtransNode
 {
-    constructor(public isProduction: boolean,public serverKey: string) {}
-    public authKey = Buffer.from(`${this.serverKey}:`, "base64").toString("utf8");
+    /**
+     * 
+     * @param isProduction Ready to production?
+     * @param authKey Your midtrans server-key
+     */
+    constructor(public isProduction: boolean,public authKey: string) {}
     public version = version;
 
     // Methods

@@ -7,8 +7,11 @@ export default function ApiRequest(production: boolean, versionApi = "v2", token
     return axios.create({
         baseURL,
         headers: {
-            "User-Agent": `Midtrans-Node/${version}`,
-            "Authorization": "Basic " + token
+            "User-Agent": `Midtrans-Node/${version}`
+        },
+        auth: {
+            username: token,
+            password: ''
         }
     });
 }

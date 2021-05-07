@@ -1,5 +1,5 @@
 import Midtrans from "../src/index";
-const midtrans = new Midtrans(false, "SB-Mid-server-FsNBPE2_N_jhsgmWaJcieiVR");
+const midtrans = new Midtrans(false, "");
 
 midtrans.createTransaction({
     transaction_details: {

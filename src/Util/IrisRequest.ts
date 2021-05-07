@@ -6,8 +6,11 @@ export default function IrisRequest(isProduction: boolean, token: string): Axios
     return axios.create({
         baseURL,
         headers:{
-            "User-Agent": "Midtrans-Node/" + version,
-            "Authorization": "Basic " + token
+            "User-Agent": "Midtrans-Node/" + version
+        },
+        auth: {
+            username: token,
+            password: ''
         }
     });
 }

@@ -6,8 +6,11 @@ export default function SnapRequest(production: boolean, token: string): AxiosIn
     return axios.create({
         baseURL,
         headers: {
-            "User-Agent": `Midtrans-Node/${version}`,
-            "Authorization": "Basic " + token
+            "User-Agent": `Midtrans-Node/${version}`
+        },
+        auth: {
+            username: token,
+            password: ''
         }
     });
 }
