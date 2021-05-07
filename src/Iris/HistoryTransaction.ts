@@ -83,7 +83,7 @@ export default async function HistoryTransaction(isProduction: boolean, fromDate
             }
         });
         return data;
-    } catch {
-        return undefined;
+    } catch(e) {
+        throw new MidtransNodeError(e.response.data);
     }
 }

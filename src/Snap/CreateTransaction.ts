@@ -1,13 +1,13 @@
 import type { SnapTransaction } from "../Interfaces/SnapTransaction";
+import MidtransNodeError from "../Util/MidtransNodeError";
 import SnapRequest from "../Util/SnapRequest";
 
 export default async function CreateTransaction(isProduction: boolean, args: SnapTransaction, token: string): Promise<{ token: string; redirect_url: string; } | undefined>
 {
-    console.log(token);
     try {
         const { data }:{ data: { token: string; redirect_url: string; }} = await SnapRequest(isProduction, token).post("/transactions", args);
         return data;
-    } catch {
-        return undefined;
+    } catch(e) {
+        throw new MidtransNodeError(e.response.data);
     }
 }

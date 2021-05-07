@@ -10,7 +10,7 @@ export default function IrisRequest(isProduction: boolean, token: string): Axios
         },
         auth: {
             username: token,
-            password: ''
+            password: ""
         }
     });
 }

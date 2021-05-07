@@ -12,4 +12,4 @@
     },
     "exclude": ["node_modules"],
     "include": ["src/**/*", "tests/**/*"]
-}
+} 

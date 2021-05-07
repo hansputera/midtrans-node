@@ -11,7 +11,7 @@ export default function ApiRequest(production: boolean, versionApi = "v2", token
         },
         auth: {
             username: token,
-            password: ''
+            password: ""
         }
     });
 }

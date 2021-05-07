@@ -11,7 +11,7 @@ parserOptions:
 plugins:
   - '@typescript-eslint'
 rules:
-  indent:
+  indent: 
     - error
     - 4
   linebreak-style:

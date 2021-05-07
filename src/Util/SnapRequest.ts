@@ -10,7 +10,7 @@ export default function SnapRequest(production: boolean, token: string): AxiosIn
         },
         auth: {
             username: token,
-            password: ''
+            password: ""
         }
     });
 }
