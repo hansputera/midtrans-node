@@ -8,6 +8,6 @@ export default async function BeneficiaryBanks(isProduction: boolean, token: str
         const { data }:{ data: BeneficiaryBank[]; } = await IrisRequest(isProduction, token).get("/beneficiary_banks");
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

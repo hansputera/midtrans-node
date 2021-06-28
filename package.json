@@ -5,6 +5,7 @@
   "main": "./compiles/src/index.js",
   "repository": "https://github.com/hansputera/midtrans-node",
   "author": "Hanif",
+  "typings": "./src/index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@types/luxon": "^1.26.4",

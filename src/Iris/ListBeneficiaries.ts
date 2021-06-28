@@ -8,6 +8,6 @@ export default async function ListBeneficiaries(isProduction: boolean, limit = 0
         const { data }:{ data: IBeneficiaries[]; } = await IrisRequest(isProduction, token).get("/beneficiaries");
         return data.splice(0, limit);
     } catch(e) {
-        throw new MidtransNodeError(e);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

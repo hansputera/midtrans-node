@@ -8,6 +8,6 @@ export default async function RefundTransaction(isProduction: boolean, orderID: 
         const { data }:{ data: IRefundObj | ITransactionFail } = await ApiRequest(isProduction, "v2", token).post(`/${orderID}/refund`, args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

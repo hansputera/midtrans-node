@@ -8,6 +8,6 @@ export default async function DenyTransaction(isProduction: boolean, orderID: st
         const { data }:{ data: ITransaction | ITransactionFail } = await ApiRequest(isProduction, "v2", token).post(`/${orderID}/deny`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

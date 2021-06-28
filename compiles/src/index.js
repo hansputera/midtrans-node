@@ -65,133 +65,133 @@ class MidtransNode {
         // Methods
         /**
          *
-         * @param args Create Transaction Arguments.
+         * @param args - Create Transaction Arguments.
          * @description More info: https://snap-docs.midtrans.com
          */
         this.createTransaction = (args) => __awaiter(this, void 0, void 0, function* () { return yield CreateTransaction_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param orderID Transaction id from charge response
-         * @param grossAmount Amount to be captured. By default will capture whole transaction amount. NOTE: Cannot be decimal
+         * @param orderID - Transaction id from charge response
+         * @param grossAmount - Amount to be captured. By default will capture whole transaction amount. NOTE: Cannot be decimal
          * @description This method is used to capture transaction balance when transaction_status is authorize. Transaction with status authorize is only available after Pre Authorization Credit Card transaction. More info: https://api-docs.midtrans.com/#capture-transaction
          */
         this.captureTransaction = (orderID, grossAmount) => __awaiter(this, void 0, void 0, function* () { return yield CaptureTransaction_1.default(this.isProduction, orderID, grossAmount, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description More info: https://api-docs.midtrans.com/#cancel-transaction
          */
         this.cancelTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield CancelTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description Approve method can be triggered to accept card payment transaction in which fraud_status is challenge. More info: https://api-docs.midtrans.com/#approve-transaction
          */
         this.approveTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield ApproveTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description Deny method can be triggered to immediately deny card payment transaction in which fraud_status is challenge. More info: https://api-docs.midtrans.com/#deny-transaction
          */
         this.denyTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield DenyTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
-         * @param args Request Refund Object includes refund_key,amount,and reason.
+         * @param orderID - Transaction ID given by Midtrans
+         * @param args - Request Refund Object includes refund_key,amount,and reason.
          * @description As opposed to previous refund API, this is used to directly send the refund request to bank or payment provider (third party). This API is useful to skip the standard operation process which may take 1 or 2 days after the initial refund request. The status of corresponding transaction will immediately be updated following the refund result received from third party. It will send HTTP notification only if the refund succeeded. More info: https://api-docs.midtrans.com/#refund-transaction
          */
         this.refundTransaction = (orderID, args) => __awaiter(this, void 0, void 0, function* () { return yield RefundTransaction_1.default(this.isProduction, orderID, args, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description More info: https://api-docs.midtrans.com/#direct-refund-transaction
          */
         this.directRefundTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield DirectRefundTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description Transaction status can be obtained by triggering the Get Status Method. More info: https://api-docs.midtrans.com/#get-transaction-status
          */
         this.statusTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield StatusTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
-         * @param page Index of the search. Default is 0.
-         * @param per_page Number of transactions which is presented. Default is 10.
+         * @param orderID - Transaction ID given by Midtrans
+         * @param page - Index of the search. Default is 0.
+         * @param per_page - Number of transactions which is presented. Default is 10.
          * @description Transaction status for all B2B transactions related to an order_id can be obtained by triggering the Get Status B2B Method. More info: https://api-docs.midtrans.com/#get-transaction-status-b2b
          */
         this.statusb2bTransaction = (orderID, page = 0, per_page = 10) => __awaiter(this, void 0, void 0, function* () { return yield StatusB2bTransaction_1.default(this.isProduction, orderID, page, per_page, this.authKey); });
         /**
          *
-         * @param args Request Register Card Object includes card_number,card_exp_month,card_exp_year,client_key,callback.
+         * @param args - Request Register Card Object includes card_number,card_exp_month,card_exp_year,client_key,callback.
          * @description More info: https://api-docs.midtrans.com/#register-card
          */
         this.registerCard = (args) => __awaiter(this, void 0, void 0, function* () { return yield RegisterCard_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param tokenId Card Token
-         * @param grossAmount The volume of the following transaction. This number can decide the remaining point balance amount which can be used on the response. NOTE: Needed for Mandiri Point.
+         * @param tokenId - Card Token
+         * @param grossAmount - The volume of the following transaction. This number can decide the remaining point balance amount which can be used on the response. NOTE: Needed for Mandiri Point.
          * @description More info: https://api-docs.midtrans.com/#point-inquiry
          */
         this.pointInquiry = (tokenId, grossAmount) => __awaiter(this, void 0, void 0, function* () { return yield PointInquiry_1.default(this.isProduction, tokenId, grossAmount, this.authKey); });
         /**
          *
-         * @param orderID Transaction ID given by Midtrans
+         * @param orderID - Transaction ID given by Midtrans
          * @description More info: https://api-docs.midtrans.com/#expire-transaction
          */
         this.expireTransaction = (orderID) => __awaiter(this, void 0, void 0, function* () { return yield ExpireTransaction_1.default(this.isProduction, orderID, this.authKey); });
         /**
          *
-         * @param args Pay Account Request Object
+         * @param args - Pay Account Request Object
          * @description More info: https://api-docs.midtrans.com/#create-pay-account
          */
         this.createPayAccount = (args) => __awaiter(this, void 0, void 0, function* () { return yield CreatePayAccount_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param accountID Pay Account ID
+         * @param accountID - Pay Account ID
          * @description More info: https://api-docs.midtrans.com/#get-pay-account
          */
         this.getPayAccount = (accountID) => __awaiter(this, void 0, void 0, function* () { return yield GetPayAccount_1.default(this.isProduction, accountID, this.authKey); });
         /**
          *
-         * @param accountID Pay Account ID
+         * @param accountID - Pay Account ID
          * @description More info: https://api-docs.midtrans.com/#unbind-pay-account
          */
         this.unbindPayAccount = (accountID) => __awaiter(this, void 0, void 0, function* () { return yield UnbindPayAccount_1.default(this.isProduction, accountID, this.authKey); });
         /**
          *
-         * @param binNumber Bin ID want to check.
+         * @param binNumber - Bin ID want to check.
          * @description Midtrans API provide Bin Lookup API to get metadata for a particular bin, such as card type (Debit/Credit) or the card brand (ex. Visa, Master). More info: https://api-docs.midtrans.com/#bin-api
          */
         this.getBin = (binNumber) => __awaiter(this, void 0, void 0, function* () { return yield GetBinNumber_1.default(this.isProduction, binNumber, this.authKey); });
         /**
          *
-         * @param args Subscription Request object.
+         * @param args - Subscription Request object.
          * @description Create subscription that contains all details for creating transaction. More info: https://api-docs.midtrans.com/#create-subscription
          */
         this.createSubscription = (args) => __awaiter(this, void 0, void 0, function* () { return yield CreateSubcription_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param subscriptionId Subscription ID given by Midtrans
+         * @param subscriptionId - Subscription ID given by Midtrans
          * @description Find subscription by id to see the subscription details. More info: https://api-docs.midtrans.com/#get-subscription
          */
         this.getSubscription = (subscriptionId) => __awaiter(this, void 0, void 0, function* () { return yield GetSubscription_1.default(this.isProduction, subscriptionId, this.authKey); });
         /**
          *
-         * @param subscriptionId Subscription ID given by Midtrans
-         * @param args Subscription request object
+         * @param subscriptionId - Subscription ID given by Midtrans
+         * @param args - Subscription request object
          * @description https://api-docs.midtrans.com/#update-subscription
          */
         this.updateSubscription = (subscriptionId, args) => __awaiter(this, void 0, void 0, function* () { return yield UpdateSubscription_1.default(this.isProduction, subscriptionId, args, this.authKey); });
         /**
          *
-         * @param subscriptionId Subscription ID given by Midtrans
+         * @param subscriptionId - Subscription ID given by Midtrans
          * @description Make the subscription inactive (the subscription will not create transaction anymore). More info: https://api-docs.midtrans.com/#disable-subscription
          */
         this.disableSubscription = (subscriptionId) => __awaiter(this, void 0, void 0, function* () { return yield DisableSubscription_1.default(this.isProduction, subscriptionId, this.authKey); });
         /**
          *
-         * @param subscriptionId Subscription ID given by Midtrans
+         * @param subscriptionId - Subscription ID given by Midtrans
          * @description Make the subscription active (the subscription will create periodic transaction). More info: https://api-docs.midtrans.com/#enable-subscription
          */
         this.enableSubscription = (subscriptionId) => __awaiter(this, void 0, void 0, function* () { return yield EnableSubscription_1.default(this.isProduction, subscriptionId, this.authKey); });
@@ -202,51 +202,51 @@ class MidtransNode {
         this.ping = () => __awaiter(this, void 0, void 0, function* () { return yield Ping_1.default(this.isProduction, this.authKey); });
         /**
          *
-         * @param args Beneficiaries request object
+         * @param args - Beneficiaries request object
          * @description Use this API to create a new beneficiary information for quick access on the payout page in Iris Portal. More info: https://iris-docs.midtrans.com/#create-beneficiaries
          */
         this.createBeneficiaries = (args) => __awaiter(this, void 0, void 0, function* () { return yield CreateBeneficiaries_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param aliasName Identifier name.
-         * @param args Beneficiaries request object
+         * @param aliasName - Identifier name.
+         * @param args - Beneficiaries request object
          * @description Use this API to update an existing beneficiary identified by its alias_name. More info: https://iris-docs.midtrans.com/#update-beneficiaries
          */
         this.updateBeneficiaries = (aliasName, args) => __awaiter(this, void 0, void 0, function* () { return yield UpdateBeneficiaries_1.default(this.isProduction, aliasName, args, this.authKey); });
         /**
          *
-         * @param limit Limit data beneficiaries.
+         * @param limit - Limit data beneficiaries.
          * @description Use this API to fetch list of all beneficiaries saved in Iris Portal. More info: https://iris-docs.midtrans.com/#list-beneficiaries
          */
         this.listBeneficiaries = (limit = 10) => __awaiter(this, void 0, void 0, function* () { return yield ListBeneficiaries_1.default(this.isProduction, limit, this.authKey); });
         /**
          *
-         * @param args Payout request object.
+         * @param args - Payout request object.
          * @description This API is for Creator to create a payout. It can be used for single payout and also multiple payouts. More info: https://iris-docs.midtrans.com/#create-payouts
          */
         this.createPayouts = (args) => __awaiter(this, void 0, void 0, function* () { return yield CreatePayouts_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param args Payout approve request object
+         * @param args - Payout approve request object
          * @description Use this API for Apporver to approve multiple payout request. More info: https://iris-docs.midtrans.com/#approve-payouts
          */
         this.approvePayouts = (args) => __awaiter(this, void 0, void 0, function* () { return yield ApprovePayouts_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param args Payout reject request object
+         * @param args - Payout reject request object
          * @description Use this API for Apporver to reject multiple payout request. More info: https://iris-docs.midtrans.com/#reject-payouts
          */
         this.rejectPayouts = (args) => __awaiter(this, void 0, void 0, function* () { return yield RejectPayouts_1.default(this.isProduction, args, this.authKey); });
         /**
          *
-         * @param refNo Unique reference_no of a payout
+         * @param refNo - Unique reference_no of a payout
          * @description Get details of a single payout. More info: https://iris-docs.midtrans.com/#get-payout-details
          */
         this.getPayoutDetails = (refNo) => __awaiter(this, void 0, void 0, function* () { return yield GetPayoutDetails_1.default(this.isProduction, refNo, this.authKey); });
         /**
          *
-         * @param fromDate start date range for payouts (YYYY-MM-DD)
-         * @param toDate end date range for payouts (YYYY-MM-DD)
+         * @param fromDate - start date range for payouts (YYYY-MM-DD)
+         * @param toDate - end date range for payouts (YYYY-MM-DD)
          * @description List all transactions history for a month. You can specified start date and also end date for range transaction history. More info: https://iris-docs.midtrans.com/#transaction-history
          */
         this.historyTransaction = (fromDate, toDate) => __awaiter(this, void 0, void 0, function* () { return yield HistoryTransaction_1.default(this.isProduction, fromDate, toDate, this.authKey); });
@@ -262,19 +262,19 @@ class MidtransNode {
         this.bankAccounts = () => __awaiter(this, void 0, void 0, function* () { return yield BankAccounts_1.default(this.isProduction, this.authKey); });
         /**
          *
-         * @param bankAccountID Bank account ID to be used when creating payouts
+         * @param bankAccountID - Bank account ID to be used when creating payouts
          * @description For Facilitator Partner, use this API is to get current balance information of your registered bank account. More info: https://iris-docs.midtrans.com/#check-balance-facilitator
          */
         this.checkBankBalance = (bankAccountID) => __awaiter(this, void 0, void 0, function* () { return yield CheckBankBalance_1.default(this.isProduction, bankAccountID, this.authKey); });
         /**
          *
-         * @description Show list of supported banks in IRIS. More info: https://iris-docs.midtrans.com/#list-banks
+         * @description - Show list of supported banks in IRIS. More info: https://iris-docs.midtrans.com/#list-banks
          */
         this.listBanks = () => __awaiter(this, void 0, void 0, function* () { return yield BeneficiaryBanks_1.default(this.isProduction, this.authKey); });
         /**
          *
-         * @param bank Bank code
-         * @param accountID	Account number
+         * @param bank - Bank code
+         * @param accountID	- Account number
          * @description Check if an account is valid, if valid return account information. More info: https://iris-docs.midtrans.com/#validate-bank-account
          */
         this.validateBankAccount = (bankName, accountID) => __awaiter(this, void 0, void 0, function* () { return yield ValidateBankAccount_1.default(this.isProduction, bankName, accountID, this.authKey); });

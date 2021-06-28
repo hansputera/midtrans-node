@@ -7,6 +7,6 @@ export default async function EnableSubscription(isProduction: boolean, subscrip
         const { data }:{ data: { status_message: string; }} = await ApiRequest(isProduction, "v2", token).post(`/subscriptions/${subscriptionId}/enable`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

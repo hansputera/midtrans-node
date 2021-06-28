@@ -7,6 +7,6 @@ export default async function Ping(isProduction: boolean, token: string): Promis
         const { data }:{ data: string; } = await IrisRequest(isProduction, token).get("/ping");
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

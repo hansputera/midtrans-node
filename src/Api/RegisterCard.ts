@@ -8,6 +8,6 @@ export default async function RegisterCard(isProduction: boolean, args: IRegiste
         const { data }:{ data: IRegisterCardResponse } = await ApiRequest(isProduction, "v2", token).post("/card/register", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

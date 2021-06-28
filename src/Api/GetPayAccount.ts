@@ -8,6 +8,6 @@ export default async function GetPayAccount(isProduction: boolean, accountID: st
         const { data }:{ data: IPayAccount } = await ApiRequest(isProduction, "v2", token).get(`/pay/account/${accountID}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

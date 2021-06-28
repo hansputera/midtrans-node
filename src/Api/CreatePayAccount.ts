@@ -8,6 +8,6 @@ export default async function CreatePayAccount(isProduction: boolean, args: ICre
         const { data }:{ data: ICreatePayAccountResponse } = await ApiRequest(isProduction, "v2", token).post("/pay/account", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

@@ -21,7 +21,7 @@ function ListBeneficiaries(isProduction, limit = 0, token) {
             return data.splice(0, limit);
         }
         catch (e) {
-            throw new MidtransNodeError_1.default(e);
+            throw new MidtransNodeError_1.default(JSON.stringify(e.response.data));
         }
     });
 }

@@ -7,6 +7,6 @@ export default async function DisableSubscription(isProduction: boolean, subscri
         const { data }:{ data: { status_message: string; }} = await ApiRequest(isProduction, "v1", token).post(`/subscriptions/${subscriptionId}/disable`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

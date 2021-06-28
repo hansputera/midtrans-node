@@ -8,6 +8,6 @@ export default async function StatusTransaction(isProduction: boolean, orderID: 
         const { data }:{ data: ITransactionStatus | ITransactionFail } = await ApiRequest(isProduction, "v2", token).get(`/${orderID}/status`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

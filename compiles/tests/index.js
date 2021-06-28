@@ -11,7 +11,7 @@ describe("midtrans", () => {
             midtrans.createTransaction({
                 transaction_details: {
                     gross_amount: 20000,
-                    order_id: "MID-21920"
+                    order_id: "MID-" + Math.floor(Math.random() * 999999999999999999999)
                 },
                 customer_details: {
                     first_name: "Brian",
@@ -21,6 +21,7 @@ describe("midtrans", () => {
                 }
             }).then((transaction) => {
                 // transaction => { token: '', redirect_url: '' }
+                console.log(transaction);
                 if (transaction)
                     done();
             }).catch((error) => {

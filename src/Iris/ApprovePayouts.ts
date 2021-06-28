@@ -8,6 +8,6 @@ export default async function ApprovePayouts(isProduction: boolean, args: IPayou
         const { data }:{ data: IPayoutSuccessAct } = await IrisRequest(isProduction, token).post("/payouts/approve", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

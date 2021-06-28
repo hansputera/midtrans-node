@@ -8,6 +8,6 @@ export default async function UnbindPayAccount(isProduction: boolean, accountID:
         const { data }:{ data: IPayAccountUnBind } = await ApiRequest(isProduction, "v2", token).post(`/pay/account/${accountID}/unbind`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

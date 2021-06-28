@@ -8,6 +8,6 @@ export default async function GetSubscription(isProduction: boolean, subscriptio
         const { data }:{ data: ISubcription } = await ApiRequest(isProduction, "v1", token).get(`/subscriptions/${subscriptionId}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

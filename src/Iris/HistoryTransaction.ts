@@ -84,6 +84,6 @@ export default async function HistoryTransaction(isProduction: boolean, fromDate
         });
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

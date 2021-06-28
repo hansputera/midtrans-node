@@ -8,6 +8,6 @@ export default async function GetPayoutDetails(isProduction: boolean, refNo: str
         const { data }:{ data: IPayout } = await IrisRequest(isProduction, token).get(`/payouts/${refNo}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

@@ -8,6 +8,6 @@ export default async function UpdateSubscription(isProduction: boolean, subscrip
         const { data }:{ data: ISubcription } = await ApiRequest(isProduction, "v1", token).patch(`/subscriptions/${subscriptionId}`, args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

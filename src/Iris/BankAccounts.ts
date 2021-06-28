@@ -8,6 +8,6 @@ export default async function BankAccounts(isProduction: boolean, token: string)
         const { data }:{ data: BankAccount[]; } = await IrisRequest(isProduction, token).get("/bank_accounts");
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

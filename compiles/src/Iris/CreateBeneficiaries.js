@@ -21,7 +21,7 @@ function CreateBeneficiaries(isProduction, args, token) {
             return data;
         }
         catch (e) {
-            throw new MidtransNodeError_1.default(e.response.data);
+            throw new MidtransNodeError_1.default(JSON.stringify(e.response.data));
         }
     });
 }

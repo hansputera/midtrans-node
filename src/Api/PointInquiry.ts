@@ -12,6 +12,6 @@ export default async function PointInquiry(isProduction: boolean, tokenId: strin
         });
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

@@ -8,6 +8,6 @@ export default async function StatusB2bTransaction(isProduction: boolean, orderI
         const { data }:{ data: { status_code: string; status_message: string; transactions: ITransaction[]; }} = await ApiRequest(isProduction, "v2", token).get(`/${orderID}/status/b2b?page=${page}&per_page=${per_page}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

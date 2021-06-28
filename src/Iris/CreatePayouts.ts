@@ -8,6 +8,6 @@ export default async function CreatePayouts(isProduction: boolean, args: IPayout
         const { data }:{ data: IPayoutCreateResponse } = await IrisRequest(isProduction, token).post("/payouts", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

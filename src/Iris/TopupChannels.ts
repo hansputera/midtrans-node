@@ -8,6 +8,6 @@ export default async function TopupChannels(isProduction: boolean, token: string
         const { data }:{ data: ITopupAggreratorChannel[]; } = await IrisRequest(isProduction, token).get("/channels");
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

@@ -8,6 +8,6 @@ export default async function CheckBankBalance(isProduction: boolean, bankAccoun
         const { data }:{ data: ICheckBalanceBank } = await IrisRequest(isProduction, token).get(`/${bankAccountId}/balance`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

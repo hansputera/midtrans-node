@@ -21,7 +21,7 @@ function GetBinNumber(isProduction, binNumber, token) {
             return data;
         }
         catch (e) {
-            throw new MidtransNodeError_1.default(e);
+            throw new MidtransNodeError_1.default(JSON.stringify(e.response.data));
         }
     });
 }

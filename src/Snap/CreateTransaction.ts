@@ -8,6 +8,6 @@ export default async function CreateTransaction(isProduction: boolean, args: Sna
         const { data }:{ data: { token: string; redirect_url: string; }} = await SnapRequest(isProduction, token).post("/transactions", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

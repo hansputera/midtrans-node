@@ -21,7 +21,7 @@ function StatusB2bTransaction(isProduction, orderID, page = 0, per_page = 10, to
             return data;
         }
         catch (e) {
-            throw new MidtransNodeError_1.default(e.response.data);
+            throw new MidtransNodeError_1.default(JSON.stringify(e.response.data));
         }
     });
 }

@@ -8,6 +8,6 @@ export default async function CreateBeneficiaries(isProduction: boolean, args: I
         const { data }:{ data: ISuccessBeneficiaries } = await IrisRequest(isProduction, token).post("/beneficiaries", args);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

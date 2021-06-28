@@ -10,6 +10,6 @@ export default async function ValidateBankAccount(isProduction: boolean, bankNam
         const { data }:{ data: IValidateBankResult } = await IrisRequest(isProduction, token).get(`/account_validation?bank=${encodeURIComponent(bankName)}&account=${bankAccountId}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e.response.data);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }

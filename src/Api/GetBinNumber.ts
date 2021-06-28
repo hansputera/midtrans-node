@@ -8,6 +8,6 @@ export default async function GetBinNumber(isProduction: boolean, binNumber: num
         const { data }:{ data: BinApiResponse } = await ApiRequest(isProduction, "v1", token).get(`/bins/${binNumber}`);
         return data;
     } catch(e) {
-        throw new MidtransNodeError(e);
+        throw new MidtransNodeError(JSON.stringify(e.response.data));
     }
 }
