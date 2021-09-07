@@ -2,7 +2,7 @@
   "name": "midtrans-node",
   "version": "1.0.1",
   "description": "Midtrans connector",
-  "main": "./compiles/src/index.js",
+  "main": "./compiles/index.js",
   "repository": "https://github.com/hansputera/midtrans-node",
   "author": "Hanif",
   "license": "MIT",
