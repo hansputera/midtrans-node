@@ -41,7 +41,7 @@ import { IPayoutRequest, IPayoutApproveRequest, IPayoutRejectRequest, IPayoutCre
  * 
  * @class MidtransNode Main class for midtrans-node.
  */
-class MidtransNode
+export class MidtransNode
 {
     /**
      * 
@@ -302,5 +302,3 @@ class MidtransNode
      */
     public validateBankAccount = async(bankName: string, accountID: string): Promise<IValidateBankResult | undefined> => await ValidateBankAccount(this.isProduction, bankName, accountID, this.authKey);
 }
-
-export default MidtransNode;
