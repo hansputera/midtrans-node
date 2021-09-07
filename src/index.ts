@@ -302,3 +302,5 @@ export class MidtransNode
      */
     public validateBankAccount = async(bankName: string, accountID: string): Promise<IValidateBankResult | undefined> => await ValidateBankAccount(this.isProduction, bankName, accountID, this.authKey);
 }
+
+export default MidtransNode;

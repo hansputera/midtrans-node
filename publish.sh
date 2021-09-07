@@ -10,7 +10,9 @@ cd src
 cp -r * ..
 
 cd ..
-rm -rf src
+if [ ! -d "Interfaces" ]
+then
+    cp -r ../src/Interfaces ./Interfaces
+fi
 
-cd .. 
 echo "Complete"
