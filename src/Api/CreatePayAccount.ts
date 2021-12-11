@@ -5,6 +5,12 @@ import type {
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
+/**
+ * @description Create a pay account
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {ICreatePayAccount} args create pay account arguments.
+ * @param {string} token midtrans server key
+ */
 export async function createPayAccount(
 	isProduction: boolean,
 	args: ICreatePayAccount,

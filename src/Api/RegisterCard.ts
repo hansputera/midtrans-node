@@ -5,7 +5,13 @@ import type {
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function RegisterCard(
+/**
+ * @description Register a card
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IRegisterCardRequest} args Register card arguments.
+ * @param {string} token midtrans server key
+ */
+export async function registerCard(
 	isProduction: boolean,
 	args: IRegisterCardRequest,
 	token: string

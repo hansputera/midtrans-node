@@ -2,6 +2,12 @@ import type { BinApiResponse } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
+/**
+ * @description Get a bin number details
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {number} binNumber A bin number
+ * @param {string} token midtrans server key
+ */
 export default async function GetBinNumber(
 	isProduction: boolean,
 	binNumber: number,

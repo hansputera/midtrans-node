@@ -2,7 +2,13 @@ import type { ITransactionStatus, ITransactionFail } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function StatusTransaction(
+/**
+ * @description Get a status of transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {string} token midtrans server key
+ */
+export async function statusTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string

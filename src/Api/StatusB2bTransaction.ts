@@ -2,11 +2,19 @@ import type { ITransaction } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function StatusB2bTransaction(
+/**
+ * @description Gets statusb2b from a transaction.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {?number} page a page.
+ * @param {?number} perPage how much data per page.
+ * @param {string} token midtrans server key
+ */
+export async function statusB2bTransaction(
 	isProduction: boolean,
 	orderID: string,
-	page = 0,
-	per_page = 10,
+	page: number | undefined = 0,
+	perPage: number | undefined = 10,
 	token: string
 ): Promise<
 	| {
@@ -26,7 +34,7 @@ export default async function StatusB2bTransaction(
 				transactions: ITransaction[];
 			};
 		} = await ApiRequest(isProduction, 'v2', token).get(
-			`/${orderID}/status/b2b?page=${page}&per_page=${per_page}`
+			`/${orderID}/status/b2b?page=${page}&per_page=${perPage}`
 		);
 		return data;
 	} catch (e) {

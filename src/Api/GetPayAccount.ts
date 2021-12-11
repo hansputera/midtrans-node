@@ -2,7 +2,13 @@ import type { IPayAccount } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function GetPayAccount(
+/**
+ * @description Get pay account details
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} accountID Pay Account ID
+ * @param {string} token midtrans server key
+ */
+export async function getPayAccount(
 	isProduction: boolean,
 	accountID: string,
 	token: string

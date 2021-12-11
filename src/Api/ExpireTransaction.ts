@@ -2,7 +2,13 @@ import { ITransaction, ITransactionFail } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function ExpireTransaction(
+/**
+ * @description Make an expire unpaid transaction.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {string} token midtrans server key
+ */
+export async function expireTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string

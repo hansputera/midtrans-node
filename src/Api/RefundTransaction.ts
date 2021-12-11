@@ -6,7 +6,14 @@ import type {
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function RefundTransaction(
+/**
+ * @description Refund a paid transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {IRefundObjRequest} args refund transaction arguments
+ * @param {string} token midtrans server key
+ */
+export async function refundTransaction(
 	isProduction: boolean,
 	orderID: string,
 	args: IRefundObjRequest,

@@ -2,7 +2,13 @@ import type { IPayAccountUnBind } from '../Interfaces';
 import ApiRequest from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function UnbindPayAccount(
+/**
+ * @description Unbind a pay account.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} accountID Pay Account ID
+ * @param {string} token midtrans server key
+ */
+export async function unbindPayAccount(
 	isProduction: boolean,
 	accountID: string,
 	token: string
