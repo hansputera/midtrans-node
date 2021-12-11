@@ -1,5 +1,5 @@
 import type { ICheckBalanceBank } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function checkBankBalance(
 	token: string
 ): Promise<ICheckBalanceBank | undefined> {
 	try {
-		const { data }: { data: ICheckBalanceBank } = await IrisRequest(
+		const { data }: { data: ICheckBalanceBank } = await irisRequest(
 			isProduction,
 			token
 		).get(`/${bankAccountId}/balance`);

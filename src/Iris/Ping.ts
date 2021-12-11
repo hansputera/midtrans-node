@@ -1,4 +1,4 @@
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -11,7 +11,7 @@ export async function ping(
 	token: string
 ): Promise<string | undefined> {
 	try {
-		const { data }: { data: string } = await IrisRequest(
+		const { data }: { data: string } = await irisRequest(
 			isProduction,
 			token
 		).get('/ping');

@@ -1,5 +1,5 @@
 import type { IBeneficiaries, ISuccessBeneficiaries } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -16,7 +16,7 @@ export async function updateBeneficiaries(
 	token: string
 ): Promise<ISuccessBeneficiaries | undefined> {
 	try {
-		const { data }: { data: ISuccessBeneficiaries } = await IrisRequest(
+		const { data }: { data: ISuccessBeneficiaries } = await irisRequest(
 			isProduction,
 			token
 		).patch(`/beneficiaries/${aliasName}`, args);

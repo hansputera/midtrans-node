@@ -1,39 +1,46 @@
-import CreateTransaction from './Snap/CreateTransaction';
-import CaptureTransaction from './Api/CaptureTransaction';
-import CancelTransaction from './Api/CancelTransaction';
-import ApproveTransaction from './Api/ApproveTransaction';
-import ChargeTransaction from './Api/ChargeTransaction';
-import DenyTransaction from './Api/DenyTransaction';
-import RefundTransaction from './Api/RefundTransaction';
-import DirectRefundTransaction from './Api/DirectRefundTransaction';
-import StatusTransaction from './Api/StatusTransaction';
-import StatusB2bTransaction from './Api/StatusB2bTransaction';
-import ExpireTransaction from './Api/ExpireTransaction';
-import RegisterCard from './Api/RegisterCard';
-import PointInquiry from './Api/PointInquiry';
-import CreatePayAccount from './Api/CreatePayAccount';
-import GetPayAccount from './Api/GetPayAccount';
-import UnbindPayAccount from './Api/UnbindPayAccount';
-import GetBinNumber from './Api/GetBinNumber';
-import CreateSubscription from './Api/Subscriptions/CreateSubcription';
-import GetSubscription from './Api/Subscriptions/GetSubscription';
-import UpdateSubscription from './Api/Subscriptions/UpdateSubscription';
-import DisableSubscription from './Api/Subscriptions/DisableSubscription';
-import EnableSubscription from './Api/Subscriptions/EnableSubscription';
-import ApprovePayouts from './Iris/ApprovePayouts';
-import BankAccounts from './Iris/BankAccounts';
-import BeneficiaryBanks from './Iris/BeneficiaryBanks';
-import CheckBankBalance from './Iris/CheckBankBalance';
-import CreateBeneficiaries from './Iris/CreateBeneficiaries';
-import CreatePayouts from './Iris/CreatePayouts';
-import GetPayoutDetails from './Iris/GetPayoutDetails';
-import HistoryTransaction from './Iris/HistoryTransaction';
-import ListBeneficiaries from './Iris/ListBeneficiaries';
-import Ping from './Iris/Ping';
-import RejectPayouts from './Iris/RejectPayouts';
-import TopupChannels from './Iris/TopupChannels';
-import UpdateBeneficiaries from './Iris/UpdateBeneficiaries';
-import ValidateBankAccount from './Iris/ValidateBankAccount';
+import { createTransaction } from './Snap';
+
+import {
+	approveTransaction,
+	refundTransaction,
+	directRefundTransaction,
+	disableSubscription,
+	enableSubscription,
+	expireTransaction,
+	statusB2bTransaction,
+	statusTransaction,
+	getPayAccount,
+	getBinNumber,
+	getSubscription,
+	createPayAccount,
+	createSubscription,
+	captureTransaction,
+	registerCard,
+	denyTransaction,
+	pointInquiry,
+	unbindPayAccount,
+	cancelTransaction,
+	chargeTransaction,
+	updateSubscription,
+} from './Api';
+
+import {
+	ping,
+	getPayoutDetails,
+	createPayouts,
+	rejectPayouts,
+	approvePayouts,
+	listBeneficiaries,
+	bankAccounts,
+	checkBankBalance,
+	createBeneficiaries,
+	updateBeneficiaries,
+	validateBankAccount,
+	historyTransaction,
+	beneficiaryBanks,
+	topupChannels,
+} from './Iris';
+
 import { version } from '../package.json';
 import type {
 	SnapTransaction,
@@ -82,9 +89,9 @@ export class MidtransNode {
 	 */
 	constructor(public isProduction: boolean, public authKey: string) {}
 
-    /**
-     * Package version
-     */
+	/**
+	 * Package version
+	 */
 	public version = version;
 
 	/**
@@ -94,7 +101,7 @@ export class MidtransNode {
 	public createTransaction = async (
 		args: SnapTransaction
 	): Promise<{ token: string; redirect_url: string } | undefined> =>
-		await CreateTransaction(this.isProduction, args, this.authKey);
+		await createTransaction(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction id from charge response
@@ -105,7 +112,7 @@ export class MidtransNode {
 		orderID: string,
 		grossAmount?: number
 	): Promise<ITransaction | ITransactionFail> =>
-		await CaptureTransaction(
+		await captureTransaction(
 			this.isProduction,
 			orderID,
 			grossAmount,
@@ -119,7 +126,7 @@ export class MidtransNode {
 	public cancelTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await CancelTransaction(this.isProduction, orderID, this.authKey);
+		await cancelTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -128,7 +135,7 @@ export class MidtransNode {
 	public approveTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await ApproveTransaction(this.isProduction, orderID, this.authKey);
+		await approveTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -137,7 +144,7 @@ export class MidtransNode {
 	public denyTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await DenyTransaction(this.isProduction, orderID, this.authKey);
+		await denyTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -148,7 +155,7 @@ export class MidtransNode {
 		orderID: string,
 		args: IRefundObjRequest
 	): Promise<IRefundObj | ITransactionFail> =>
-		await RefundTransaction(this.isProduction, orderID, args, this.authKey);
+		await refundTransaction(this.isProduction, orderID, args, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -157,7 +164,7 @@ export class MidtransNode {
 	public directRefundTransaction = async (
 		orderID: string
 	): Promise<IRefundObj | ITransactionFail> =>
-		await DirectRefundTransaction(this.isProduction, orderID, this.authKey);
+		await directRefundTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -166,7 +173,7 @@ export class MidtransNode {
 	public statusTransaction = async (
 		orderID: string
 	): Promise<ITransactionStatus | ITransactionFail> =>
-		await StatusTransaction(this.isProduction, orderID, this.authKey);
+		await statusTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -186,7 +193,7 @@ export class MidtransNode {
 		  }
 		| undefined
 	> =>
-		await StatusB2bTransaction(
+		await statusB2bTransaction(
 			this.isProduction,
 			orderID,
 			page,
@@ -201,7 +208,7 @@ export class MidtransNode {
 	public registerCard = async (
 		args: IRegisterCardRequest
 	): Promise<IRegisterCardResponse | undefined> =>
-		await RegisterCard(this.isProduction, args, this.authKey);
+		await registerCard(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} tokenId - Card Token
@@ -212,7 +219,7 @@ export class MidtransNode {
 		tokenId: string,
 		grossAmount?: number
 	): Promise<IPointInquiry | undefined> =>
-		await PointInquiry(this.isProduction, tokenId, grossAmount, this.authKey);
+		await pointInquiry(this.isProduction, tokenId, grossAmount, this.authKey);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -221,7 +228,7 @@ export class MidtransNode {
 	public expireTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await ExpireTransaction(this.isProduction, orderID, this.authKey);
+		await expireTransaction(this.isProduction, orderID, this.authKey);
 
 	/**
 	 * @param {ICreatePayAccount} args - Pay Account Request Object
@@ -230,7 +237,7 @@ export class MidtransNode {
 	public createPayAccount = async (
 		args: ICreatePayAccount
 	): Promise<ICreatePayAccountResponse | undefined> =>
-		await CreatePayAccount(this.isProduction, args, this.authKey);
+		await createPayAccount(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} accountID - Pay Account ID
@@ -239,7 +246,7 @@ export class MidtransNode {
 	public getPayAccount = async (
 		accountID: string
 	): Promise<IPayAccount | undefined> =>
-		await GetPayAccount(this.isProduction, accountID, this.authKey);
+		await getPayAccount(this.isProduction, accountID, this.authKey);
 
 	/**
 	 * @param {string} accountID - Pay Account ID
@@ -248,7 +255,7 @@ export class MidtransNode {
 	public unbindPayAccount = async (
 		accountID: string
 	): Promise<IPayAccountUnBind | undefined> =>
-		await UnbindPayAccount(this.isProduction, accountID, this.authKey);
+		await unbindPayAccount(this.isProduction, accountID, this.authKey);
 
 	/**
 	 * @param {number} binNumber - Bin ID want to check.
@@ -257,7 +264,7 @@ export class MidtransNode {
 	public getBin = async (
 		binNumber: number
 	): Promise<BinApiResponse | undefined> =>
-		await GetBinNumber(this.isProduction, binNumber, this.authKey);
+		await getBinNumber(this.isProduction, binNumber, this.authKey);
 
 	/**
 	 * @param {ICreateSubcription} args - Subscription Request object.
@@ -266,7 +273,7 @@ export class MidtransNode {
 	public createSubscription = async (
 		args: ICreateSubcription
 	): Promise<ISubcription | undefined> =>
-		await CreateSubscription(this.isProduction, args, this.authKey);
+		await createSubscription(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -275,7 +282,7 @@ export class MidtransNode {
 	public getSubscription = async (
 		subscriptionId: string
 	): Promise<ISubcription | undefined> =>
-		await GetSubscription(this.isProduction, subscriptionId, this.authKey);
+		await getSubscription(this.isProduction, subscriptionId, this.authKey);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -286,7 +293,7 @@ export class MidtransNode {
 		subscriptionId: string,
 		args: IUpdateSubcription
 	): Promise<ISubcription | undefined> =>
-		await UpdateSubscription(
+		await updateSubscription(
 			this.isProduction,
 			subscriptionId,
 			args,
@@ -300,7 +307,7 @@ export class MidtransNode {
 	public disableSubscription = async (
 		subscriptionId: string
 	): Promise<{ status_message: string } | undefined> =>
-		await DisableSubscription(this.isProduction, subscriptionId, this.authKey);
+		await disableSubscription(this.isProduction, subscriptionId, this.authKey);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -309,13 +316,13 @@ export class MidtransNode {
 	public enableSubscription = async (
 		subscriptionId: string
 	): Promise<{ status_message: string } | undefined> =>
-		await EnableSubscription(this.isProduction, subscriptionId, this.authKey);
+		await enableSubscription(this.isProduction, subscriptionId, this.authKey);
 
 	/**
 	 * @description Returns pong message for monitoring purpose
 	 */
 	public ping = async (): Promise<string | undefined> =>
-		await Ping(this.isProduction, this.authKey);
+		await ping(this.isProduction, this.authKey);
 
 	/**
 	 * @param {IBeneficiaries} args - Beneficiaries request object
@@ -324,7 +331,7 @@ export class MidtransNode {
 	public createBeneficiaries = async (
 		args: IBeneficiaries
 	): Promise<ISuccessBeneficiaries | undefined> =>
-		await CreateBeneficiaries(this.isProduction, args, this.authKey);
+		await createBeneficiaries(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} aliasName - Identifier name.
@@ -335,7 +342,7 @@ export class MidtransNode {
 		aliasName: string,
 		args: IBeneficiaries
 	): Promise<ISuccessBeneficiaries | undefined> =>
-		await UpdateBeneficiaries(this.isProduction, aliasName, args, this.authKey);
+		await updateBeneficiaries(this.isProduction, aliasName, args, this.authKey);
 
 	/**
 	 * @param {number} limit - Limit data beneficiaries.
@@ -344,7 +351,7 @@ export class MidtransNode {
 	public listBeneficiaries = async (
 		limit = 10
 	): Promise<IBeneficiaries[] | undefined> =>
-		await ListBeneficiaries(this.isProduction, limit, this.authKey);
+		await listBeneficiaries(this.isProduction, limit, this.authKey);
 
 	/**
 	 * @param {IPayoutRequest} args - Payout request object.
@@ -353,7 +360,7 @@ export class MidtransNode {
 	public createPayouts = async (
 		args: IPayoutRequest
 	): Promise<IPayoutCreateResponse | undefined> =>
-		await CreatePayouts(this.isProduction, args, this.authKey);
+		await createPayouts(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {IPayoutApproveRequest} args - Payout approve request object
@@ -362,7 +369,7 @@ export class MidtransNode {
 	public approvePayouts = async (
 		args: IPayoutApproveRequest
 	): Promise<IPayoutSuccessAct | undefined> =>
-		await ApprovePayouts(this.isProduction, args, this.authKey);
+		await approvePayouts(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {IPayoutRejectRequest} args - Payout reject request object
@@ -371,7 +378,7 @@ export class MidtransNode {
 	public rejectPayouts = async (
 		args: IPayoutRejectRequest
 	): Promise<IPayoutSuccessAct | undefined> =>
-		await RejectPayouts(this.isProduction, args, this.authKey);
+		await rejectPayouts(this.isProduction, args, this.authKey);
 
 	/**
 	 * @param {string} refNo - Unique reference_no of a payout
@@ -380,7 +387,7 @@ export class MidtransNode {
 	public getPayoutDetails = async (
 		refNo: string
 	): Promise<IPayout | undefined> =>
-		await GetPayoutDetails(this.isProduction, refNo, this.authKey);
+		await getPayoutDetails(this.isProduction, refNo, this.authKey);
 
 	/**
 	 * @param {IStatementDate} fromDate - start date range for payouts (YYYY-MM-DD)
@@ -391,20 +398,20 @@ export class MidtransNode {
 		fromDate?: IStatementDate,
 		toDate?: IStatementDate
 	): Promise<IStatementResult[] | undefined> =>
-		await HistoryTransaction(this.isProduction, fromDate, toDate, this.authKey);
+		await historyTransaction(this.isProduction, fromDate, toDate, this.authKey);
 
 	/**
 	 * @description Provide top up information channel for Aggregator Partner
 	 */
 	public topupChannels = async (): Promise<
 		ITopupAggreratorChannel[] | undefined
-	> => await TopupChannels(this.isProduction, this.authKey);
+	> => await topupChannels(this.isProduction, this.authKey);
 
 	/**
 	 * @description Show list of registered bank accounts for facilitator partner. More info: https://iris-docs.midtrans.com/#bank-accounts-facilitator
 	 */
 	public bankAccounts = async (): Promise<BankAccount[] | undefined> =>
-		await BankAccounts(this.isProduction, this.authKey);
+		await bankAccounts(this.isProduction, this.authKey);
 
 	/**
 	 * @param {string} bankAccountID - Bank account ID to be used when creating payouts
@@ -413,13 +420,13 @@ export class MidtransNode {
 	public checkBankBalance = async (
 		bankAccountID: string
 	): Promise<ICheckBalanceBank | undefined> =>
-		await CheckBankBalance(this.isProduction, bankAccountID, this.authKey);
+		await checkBankBalance(this.isProduction, bankAccountID, this.authKey);
 
 	/**
 	 * @description - Show list of supported banks in IRIS. More info: https://iris-docs.midtrans.com/#list-banks
 	 */
 	public listBanks = async (): Promise<BeneficiaryBank[] | undefined> =>
-		await BeneficiaryBanks(this.isProduction, this.authKey);
+		await beneficiaryBanks(this.isProduction, this.authKey);
 
 	/**
 	 * @param {string} bankName - Bank code
@@ -430,7 +437,7 @@ export class MidtransNode {
 		bankName: string,
 		accountID: string
 	): Promise<IValidateBankResult | undefined> =>
-		await ValidateBankAccount(
+		await validateBankAccount(
 			this.isProduction,
 			bankName,
 			accountID,
@@ -440,7 +447,7 @@ export class MidtransNode {
 	public chargeTransaction = async (
 		args: IChargeTransactionArgs
 	): Promise<IChargeTransactionResult | undefined> =>
-		await ChargeTransaction(this.isProduction, args, this.authKey);
+		await chargeTransaction(this.isProduction, args, this.authKey);
 }
 
 export default MidtransNode;

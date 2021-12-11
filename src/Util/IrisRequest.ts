@@ -1,7 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
 import { version } from '../../package.json';
 
-export default function IrisRequest(
+/**
+ * @description get axios request instance.
+ * @param {boolean} production Production mode?
+ * @param {string} token midtrans server key
+ */
+export function irisRequest(
 	isProduction: boolean,
 	token: string
 ): AxiosInstance {

@@ -1,5 +1,5 @@
 import type { BankAccount } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -12,7 +12,7 @@ export async function bankAccounts(
 	token: string
 ): Promise<BankAccount[] | undefined> {
 	try {
-		const { data }: { data: BankAccount[] } = await IrisRequest(
+		const { data }: { data: BankAccount[] } = await irisRequest(
 			isProduction,
 			token
 		).get('/bank_accounts');

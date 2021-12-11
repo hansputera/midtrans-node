@@ -1,5 +1,5 @@
 import { ITopupAggreratorChannel } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -12,7 +12,7 @@ export async function topupChannels(
 	token: string
 ): Promise<ITopupAggreratorChannel[] | undefined> {
 	try {
-		const { data }: { data: ITopupAggreratorChannel[] } = await IrisRequest(
+		const { data }: { data: ITopupAggreratorChannel[] } = await irisRequest(
 			isProduction,
 			token
 		).get('/channels');

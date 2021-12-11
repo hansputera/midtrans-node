@@ -1,5 +1,5 @@
 import type { IPayout } from '../Interfaces/Payouts';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function getPayoutDetails(
 	token: string
 ): Promise<IPayout | undefined> {
 	try {
-		const { data }: { data: IPayout } = await IrisRequest(
+		const { data }: { data: IPayout } = await irisRequest(
 			isProduction,
 			token
 		).get(`/payouts/${refNo}`);

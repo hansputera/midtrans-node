@@ -1,5 +1,5 @@
 import type { IBeneficiaries } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function listBeneficiaries(
 	token: string
 ): Promise<IBeneficiaries[] | undefined> {
 	try {
-		const { data }: { data: IBeneficiaries[] } = await IrisRequest(
+		const { data }: { data: IBeneficiaries[] } = await irisRequest(
 			isProduction,
 			token
 		).get('/beneficiaries');

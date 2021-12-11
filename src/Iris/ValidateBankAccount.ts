@@ -1,6 +1,6 @@
 import MidtransNodeError from '../Util/MidtransNodeError';
 import type { IValidateBankResult } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 
 /**
  * @description Validate a bank account
@@ -20,7 +20,7 @@ export async function validateBankAccount(
 	else if (!/[0-9]/gi.test(bankAccountId))
 		throw new MidtransNodeError('Invalid Bank account ID');
 	try {
-		const { data }: { data: IValidateBankResult } = await IrisRequest(
+		const { data }: { data: IValidateBankResult } = await irisRequest(
 			isProduction,
 			token
 		).get(

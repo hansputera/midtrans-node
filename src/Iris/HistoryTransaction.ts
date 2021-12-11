@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import type { IStatementDate, IStatementResult } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 const date = new Date();
@@ -101,7 +101,7 @@ export async function historyTransaction(
 	const isoFromDate = fromDate._date.toISODate();
 	const isoToDate = toDate._date.toISODate();
 	try {
-		const { data }: { data: IStatementResult[] } = await IrisRequest(
+		const { data }: { data: IStatementResult[] } = await irisRequest(
 			isProduction,
 			token
 		).get('/statements', {

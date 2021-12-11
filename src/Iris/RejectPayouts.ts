@@ -2,7 +2,7 @@ import type {
 	IPayoutRejectRequest,
 	IPayoutSuccessAct,
 } from '../Interfaces/Payouts';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -17,7 +17,7 @@ export async function rejectPayouts(
 	token: string
 ): Promise<IPayoutSuccessAct | undefined> {
 	try {
-		const { data }: { data: IPayoutSuccessAct } = await IrisRequest(
+		const { data }: { data: IPayoutSuccessAct } = await irisRequest(
 			isProduction,
 			token
 		).post('/payouts/reject', args);

@@ -8,7 +8,7 @@ import MidtransNodeError from '../Util/MidtransNodeError';
  * @param {number} binNumber A bin number
  * @param {string} token midtrans server key
  */
-export default async function GetBinNumber(
+export async function getBinNumber(
 	isProduction: boolean,
 	binNumber: number,
 	token: string

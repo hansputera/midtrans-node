@@ -14,6 +14,7 @@ export * from './CreatePayAccount';
 export * from './GetPayAccount';
 export * from './UnbindPayAccount';
 
+export * from './PointInquiry';
 export * from './RegisterCard';
 export * from './GetBinNumber';
 export * from './Subscriptions';

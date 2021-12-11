@@ -1,5 +1,5 @@
 import type { BeneficiaryBank } from '../Interfaces';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -7,12 +7,12 @@ import MidtransNodeError from '../Util/MidtransNodeError';
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} token midtrans server key
  */
-export default async function BeneficiaryBanks(
+export async function beneficiaryBanks(
 	isProduction: boolean,
 	token: string
 ): Promise<BeneficiaryBank[] | undefined> {
 	try {
-		const { data }: { data: BeneficiaryBank[] } = await IrisRequest(
+		const { data }: { data: BeneficiaryBank[] } = await irisRequest(
 			isProduction,
 			token
 		).get('/beneficiary_banks');

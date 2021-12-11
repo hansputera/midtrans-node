@@ -2,7 +2,7 @@ import type {
 	IPayoutRequest,
 	IPayoutCreateResponse,
 } from '../Interfaces/Payouts';
-import IrisRequest from '../Util/IrisRequest';
+import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -17,7 +17,7 @@ export async function createPayouts(
 	token: string
 ): Promise<IPayoutCreateResponse | undefined> {
 	try {
-		const { data }: { data: IPayoutCreateResponse } = await IrisRequest(
+		const { data }: { data: IPayoutCreateResponse } = await irisRequest(
 			isProduction,
 			token
 		).post('/payouts', args);
