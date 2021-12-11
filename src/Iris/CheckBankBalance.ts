@@ -2,7 +2,13 @@ import type { ICheckBalanceBank } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function CheckBankBalance(
+/**
+ * @description Check bank balance from a bank account id
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} bankAccountId A bank account id
+ * @param {string} token midtrans server key
+ */
+export async function checkBankBalance(
 	isProduction: boolean,
 	bankAccountId: string,
 	token: string

@@ -5,7 +5,13 @@ import type {
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function CreatePayouts(
+/**
+ * @description Create payouts
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IPayoutRequest} args create payouts arguments.
+ * @param {string} token midtrans server key
+ */
+export async function createPayouts(
 	isProduction: boolean,
 	args: IPayoutRequest,
 	token: string

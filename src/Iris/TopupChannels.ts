@@ -2,7 +2,12 @@ import { ITopupAggreratorChannel } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function TopupChannels(
+/**
+ * @description Get topup channels
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} token midtrans server key
+ */
+export async function topupChannels(
 	isProduction: boolean,
 	token: string
 ): Promise<ITopupAggreratorChannel[] | undefined> {

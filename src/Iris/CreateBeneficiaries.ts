@@ -2,7 +2,13 @@ import type { IBeneficiaries, ISuccessBeneficiaries } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function CreateBeneficiaries(
+/**
+ * @description Create beneficiaries.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IBeneficiaries} args create beneficiaries arguments.
+ * @param {string} token midtrans server key
+ */
+export async function createBeneficiaries(
 	isProduction: boolean,
 	args: IBeneficiaries,
 	token: string

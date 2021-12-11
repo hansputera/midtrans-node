@@ -2,7 +2,12 @@ import type { BankAccount } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function BankAccounts(
+/**
+ * @description get bank account list
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} token midtrans server key
+ */
+export async function bankAccounts(
 	isProduction: boolean,
 	token: string
 ): Promise<BankAccount[] | undefined> {

@@ -1,7 +1,12 @@
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function Ping(
+/**
+ * @description Ping iris api.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {?string} token midtrans server key
+ */
+export async function ping(
 	isProduction: boolean,
 	token: string
 ): Promise<string | undefined> {

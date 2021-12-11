@@ -2,7 +2,14 @@ import MidtransNodeError from '../Util/MidtransNodeError';
 import type { IValidateBankResult } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 
-export default async function ValidateBankAccount(
+/**
+ * @description Validate a bank account
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} bankName Bank name (e.g. BNI, BCA, etc..)
+ * @param {string} bankAccountId A bank account id
+ * @param {string} token midtrans server key
+ */
+export async function validateBankAccount(
 	isProduction: boolean,
 	bankName: string,
 	bankAccountId: string,

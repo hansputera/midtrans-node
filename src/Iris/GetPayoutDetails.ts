@@ -2,7 +2,13 @@ import type { IPayout } from '../Interfaces/Payouts';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function GetPayoutDetails(
+/**
+ * @description Get payout details
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} refNo Payout reference number.
+ * @param {string} token midtrans server key
+ */
+export async function getPayoutDetails(
 	isProduction: boolean,
 	refNo: string,
 	token: string

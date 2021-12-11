@@ -2,7 +2,14 @@ import type { IBeneficiaries, ISuccessBeneficiaries } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function UpdateBeneficiaries(
+/**
+ * @description update beneficiaries.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} aliasName Beneficiaries alias name.
+ * @param {IBeneficiaries} args update beneficiaries arguments.
+ * @param {string} token midtrans server key
+ */
+export async function updateBeneficiaries(
 	isProduction: boolean,
 	aliasName: string,
 	args: IBeneficiaries,

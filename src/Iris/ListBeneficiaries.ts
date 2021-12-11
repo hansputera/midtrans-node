@@ -2,9 +2,15 @@ import type { IBeneficiaries } from '../Interfaces';
 import IrisRequest from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function ListBeneficiaries(
+/**
+ * @description get beneficiaries list.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {?number} limit how much data you want to retrieve?
+ * @param {string} token midtrans server key
+ */
+export async function listBeneficiaries(
 	isProduction: boolean,
-	limit = 0,
+	limit: number | undefined = 0,
 	token: string
 ): Promise<IBeneficiaries[] | undefined> {
 	try {

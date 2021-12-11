@@ -62,7 +62,14 @@ const validDate = (d: IStatementDate) => {
 		throw new MidtransNodeError('Invalid days date');
 };
 
-export default async function HistoryTransaction(
+/**
+ * @description Get a history transaction by date.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IStatementDate?} fromDate date to start viewing transaction history.
+ * @param {IStatementDate?} toDate the last date to get the transaction history.
+ * @param {string} token midtrans server key
+ */
+export async function historyTransaction(
 	isProduction: boolean,
 	fromDate?: IStatementDate,
 	toDate?: IStatementDate,
