@@ -1,8 +1,9 @@
 {
-  "name": "@hanifdwypoetras/midtrans-node",
-  "version": "1.0.2",
+  "name": "hanif-midtrans-node",
+  "version": "1.0.6",
   "description": "Midtrans API Wrapper for NodeJS with typescript.",
   "main": "./compiles/src/index.js",
+  "typings": "./compiles/src/index.d.ts",
   "repository": "https://github.com/hansputera/midtrans-node",
   "author": "Hanif",
   "license": "MIT",

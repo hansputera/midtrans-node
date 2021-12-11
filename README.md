@@ -7,11 +7,11 @@
 ## 🤔 Installation
 You need to install the package first!
 
-> npm install @hanifdwypoetras/midtrans-node
+> npm install hanif-midtrans-node
 
-> yarn add @hanifdwypoetras/midtrans-node
+> yarn add hanif-midtrans-node
 
-> pnpm add @hanifdwypoetras/midtrans-node
+> pnpm install hanif-midtrans-node
 
 ## Usage 🤟
 
@@ -19,7 +19,7 @@ You just need a midtrans server key from https://dashboard.midtrans.com.
 And, you're ready to code!
 
 ```ts
-import { MidtransNode } from 'midtrans-node';
+import { MidtransNode } from 'hanif-midtrans-node';
 
 // new MidtransNode(isProduction, midtransServerKey);
 const midtrans = new MidtransNode(false, 'YOUR MIDTRANS SERVER KEY'); // sandbox mode

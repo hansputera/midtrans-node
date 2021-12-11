@@ -10,3 +10,7 @@ node_modules
 tests
 .mocharc.js
 yarn.lock
+docs
+typedoc.json
+.github
+
