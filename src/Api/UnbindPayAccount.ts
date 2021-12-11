@@ -1,5 +1,5 @@
 import type { IPayAccountUnBind } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function unbindPayAccount(
 	token: string
 ): Promise<IPayAccountUnBind | undefined> {
 	try {
-		const { data }: { data: IPayAccountUnBind } = await ApiRequest(
+		const { data }: { data: IPayAccountUnBind } = await apiRequest(
 			isProduction,
 			'v2',
 			token

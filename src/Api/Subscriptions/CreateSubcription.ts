@@ -2,7 +2,7 @@ import type {
 	ICreateSubcription,
 	ICreateSubcriptionResponse,
 } from '../../Interfaces';
-import ApiRequest from '../../Util/ApiRequest';
+import { apiRequest } from '../../Util/ApiRequest';
 import MidtransNodeError from '../../Util/MidtransNodeError';
 
 /**
@@ -17,7 +17,7 @@ export async function createSubscription(
 	token: string
 ): Promise<ICreateSubcriptionResponse | undefined> {
 	try {
-		const { data }: { data: ICreateSubcriptionResponse } = await ApiRequest(
+		const { data }: { data: ICreateSubcriptionResponse } = await apiRequest(
 			isProduction,
 			'v1',
 			token

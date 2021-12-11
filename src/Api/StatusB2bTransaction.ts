@@ -1,5 +1,5 @@
 import type { ITransaction } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -33,7 +33,7 @@ export async function statusB2bTransaction(
 				status_message: string;
 				transactions: ITransaction[];
 			};
-		} = await ApiRequest(isProduction, 'v2', token).get(
+		} = await apiRequest(isProduction, 'v2', token).get(
 			`/${orderID}/status/b2b?page=${page}&per_page=${perPage}`
 		);
 		return data;

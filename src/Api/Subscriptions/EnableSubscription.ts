@@ -1,4 +1,4 @@
-import ApiRequest from '../../Util/ApiRequest';
+import { apiRequest } from '../../Util/ApiRequest';
 import MidtransNodeError from '../../Util/MidtransNodeError';
 
 /**
@@ -13,7 +13,7 @@ export async function enableSubscription(
 	token: string
 ): Promise<{ status_message: string } | undefined> {
 	try {
-		const { data }: { data: { status_message: string } } = await ApiRequest(
+		const { data }: { data: { status_message: string } } = await apiRequest(
 			isProduction,
 			'v2',
 			token

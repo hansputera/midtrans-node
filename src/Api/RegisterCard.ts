@@ -2,7 +2,7 @@ import type {
 	IRegisterCardRequest,
 	IRegisterCardResponse,
 } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -17,7 +17,7 @@ export async function registerCard(
 	token: string
 ): Promise<IRegisterCardResponse | undefined> {
 	try {
-		const { data }: { data: IRegisterCardResponse } = await ApiRequest(
+		const { data }: { data: IRegisterCardResponse } = await apiRequest(
 			isProduction,
 			'v2',
 			token

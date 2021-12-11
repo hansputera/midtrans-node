@@ -1,5 +1,5 @@
 import type { IPointInquiry } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -16,11 +16,11 @@ export async function pointInquiry(
 	token?: string
 ): Promise<IPointInquiry | undefined> {
 	const getBody: {
-        gross_amount?: number;
-    } = {};
+		gross_amount?: number;
+	} = {};
 	if (grossAmount) getBody.gross_amount = grossAmount;
 	try {
-		const { data }: { data: IPointInquiry } = await ApiRequest(
+		const { data }: { data: IPointInquiry } = await apiRequest(
 			isProduction,
 			'v2',
 			token

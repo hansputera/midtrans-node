@@ -3,7 +3,7 @@ import type {
 	IChargeTransactionResult,
 } from '../Interfaces';
 import MidtransNodeError from '../Util/MidtransNodeError';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 
 /**
  * @description Charge an unpaid transaction
@@ -21,7 +21,7 @@ export async function chargeTransaction(
 			data,
 		}: {
 			data: IChargeTransactionResult;
-		} = await ApiRequest(isProduction, 'v2', token).post('/charge', args);
+		} = await apiRequest(isProduction, 'v2', token).post('/charge', args);
 
 		return data;
 	} catch (e) {

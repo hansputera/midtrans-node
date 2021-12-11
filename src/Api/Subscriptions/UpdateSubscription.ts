@@ -1,5 +1,5 @@
 import type { IUpdateSubcription, ISubcription } from '../../Interfaces';
-import ApiRequest from '../../Util/ApiRequest';
+import { apiRequest } from '../../Util/ApiRequest';
 import MidtransNodeError from '../../Util/MidtransNodeError';
 
 /**
@@ -16,7 +16,7 @@ export async function updateSubscription(
 	token: string
 ): Promise<ISubcription | undefined> {
 	try {
-		const { data }: { data: ISubcription } = await ApiRequest(
+		const { data }: { data: ISubcription } = await apiRequest(
 			isProduction,
 			'v1',
 			token

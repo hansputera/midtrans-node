@@ -2,7 +2,7 @@ import type {
 	ICreatePayAccount,
 	ICreatePayAccountResponse,
 } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -17,7 +17,7 @@ export async function createPayAccount(
 	token: string
 ): Promise<ICreatePayAccountResponse | undefined> {
 	try {
-		const { data }: { data: ICreatePayAccountResponse } = await ApiRequest(
+		const { data }: { data: ICreatePayAccountResponse } = await apiRequest(
 			isProduction,
 			'v2',
 			token

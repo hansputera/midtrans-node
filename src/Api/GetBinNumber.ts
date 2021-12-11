@@ -1,5 +1,5 @@
 import type { BinApiResponse } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function getBinNumber(
 	token: string
 ): Promise<BinApiResponse | undefined> {
 	try {
-		const { data }: { data: BinApiResponse } = await ApiRequest(
+		const { data }: { data: BinApiResponse } = await apiRequest(
 			isProduction,
 			'v1',
 			token

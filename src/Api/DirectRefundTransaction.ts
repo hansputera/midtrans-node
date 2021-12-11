@@ -1,5 +1,5 @@
 import type { IRefundObj, ITransactionFail } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function directRefundTransaction(
 	token: string
 ): Promise<IRefundObj | ITransactionFail | undefined> {
 	try {
-		const { data }: { data: IRefundObj | ITransactionFail } = await ApiRequest(
+		const { data }: { data: IRefundObj | ITransactionFail } = await apiRequest(
 			isProduction,
 			'v2',
 			token

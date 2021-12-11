@@ -1,5 +1,5 @@
 import type { IPayAccount } from '../Interfaces';
-import ApiRequest from '../Util/ApiRequest';
+import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 
 /**
@@ -14,7 +14,7 @@ export async function getPayAccount(
 	token: string
 ): Promise<IPayAccount | undefined> {
 	try {
-		const { data }: { data: IPayAccount } = await ApiRequest(
+		const { data }: { data: IPayAccount } = await apiRequest(
 			isProduction,
 			'v2',
 			token
