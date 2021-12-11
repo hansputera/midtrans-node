@@ -2,7 +2,13 @@ import type { SnapTransaction } from '../Interfaces/SnapTransaction';
 import MidtransNodeError from '../Util/MidtransNodeError';
 import SnapRequest from '../Util/SnapRequest';
 
-export default async function CreateTransaction(
+/**
+ * @description create a transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {SnapTransaction} args create transaction arguments.
+ * @param {?string} token midtrans server key
+ */
+export async function createTransaction(
 	isProduction: boolean,
 	args: SnapTransaction,
 	token: string
