@@ -12,19 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.enableSubscription = void 0;
-const ApiRequest_1 = require("../../Util/ApiRequest");
-const MidtransNodeError_1 = __importDefault(require("../../Util/MidtransNodeError"));
+exports.chargeTransaction = void 0;
+const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
+const ApiRequest_1 = require("../Util/ApiRequest");
 /**
- * @description Enable a subscription
+ * @description Charge an unpaid transaction
  * @param {boolean} isProduction Production/Sandbox mode
- * @param {string} subscriptionId subscription id want to disable
- * @param {token} token midtrans server key
+ * @param {IChargeTransactionArgs} args Charge transaction arguments
+ * @param {string} token midtrans server key
  */
-function enableSubscription(isProduction, subscriptionId, token) {
+function chargeTransaction(isProduction, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post(`/subscriptions/${subscriptionId}/enable`);
+            const { data, } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post('/charge', args);
             return data;
         }
         catch (e) {
@@ -32,4 +32,4 @@ function enableSubscription(isProduction, subscriptionId, token) {
         }
     });
 }
-exports.enableSubscription = enableSubscription;
+exports.chargeTransaction = chargeTransaction;

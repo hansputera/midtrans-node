@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.registerCard = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function RegisterCard(isProduction, args, token) {
+/**
+ * @description Register a card
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IRegisterCardRequest} args Register card arguments.
+ * @param {string} token midtrans server key
+ */
+function registerCard(isProduction, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post("/card/register", args);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post('/card/register', args);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function RegisterCard(isProduction, args, token) {
         }
     });
 }
-exports.default = RegisterCard;
+exports.registerCard = registerCard;

@@ -12,12 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.statusB2bTransaction = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function StatusB2bTransaction(isProduction, orderID, page = 0, per_page = 10, token) {
+/**
+ * @description Gets statusb2b from a transaction.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {?number} page a page.
+ * @param {?number} perPage how much data per page.
+ * @param {string} token midtrans server key
+ */
+function statusB2bTransaction(isProduction, orderID, page = 0, perPage = 10, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).get(`/${orderID}/status/b2b?page=${page}&per_page=${per_page}`);
+            const { data, } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).get(`/${orderID}/status/b2b?page=${page}&per_page=${perPage}`);
             return data;
         }
         catch (e) {
@@ -25,4 +34,4 @@ function StatusB2bTransaction(isProduction, orderID, page = 0, per_page = 10, to
         }
     });
 }
-exports.default = StatusB2bTransaction;
+exports.statusB2bTransaction = statusB2bTransaction;

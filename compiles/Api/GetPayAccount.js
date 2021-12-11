@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.getPayAccount = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function GetPayAccount(isProduction, accountID, token) {
+/**
+ * @description Get pay account details
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} accountID Pay Account ID
+ * @param {string} token midtrans server key
+ */
+function getPayAccount(isProduction, accountID, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).get(`/pay/account/${accountID}`);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).get(`/pay/account/${accountID}`);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function GetPayAccount(isProduction, accountID, token) {
         }
     });
 }
-exports.default = GetPayAccount;
+exports.getPayAccount = getPayAccount;

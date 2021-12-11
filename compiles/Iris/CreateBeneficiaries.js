@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const IrisRequest_1 = __importDefault(require("../Util/IrisRequest"));
+exports.createBeneficiaries = void 0;
+const IrisRequest_1 = require("../Util/IrisRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function CreateBeneficiaries(isProduction, args, token) {
+/**
+ * @description Create beneficiaries.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IBeneficiaries} args create beneficiaries arguments.
+ * @param {string} token midtrans server key
+ */
+function createBeneficiaries(isProduction, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, IrisRequest_1.default)(isProduction, token).post("/beneficiaries", args);
+            const { data } = yield (0, IrisRequest_1.irisRequest)(isProduction, token).post('/beneficiaries', args);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function CreateBeneficiaries(isProduction, args, token) {
         }
     });
 }
-exports.default = CreateBeneficiaries;
+exports.createBeneficiaries = createBeneficiaries;

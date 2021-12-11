@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const IrisRequest_1 = __importDefault(require("../Util/IrisRequest"));
+exports.approvePayouts = void 0;
+const IrisRequest_1 = require("../Util/IrisRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function ApprovePayouts(isProduction, args, token) {
+/**
+ * @description Approve a payouts
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IPayoutApproveRequest} args Payout approve request arguments.
+ * @param {string} token midtrans server key
+ */
+function approvePayouts(isProduction, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, IrisRequest_1.default)(isProduction, token).post("/payouts/approve", args);
+            const { data } = yield (0, IrisRequest_1.irisRequest)(isProduction, token).post('/payouts/approve', args);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function ApprovePayouts(isProduction, args, token) {
         }
     });
 }
-exports.default = ApprovePayouts;
+exports.approvePayouts = approvePayouts;

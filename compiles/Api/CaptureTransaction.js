@@ -12,17 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.captureTransaction = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function CaptureTransaction(isProduction, orderID, grossAmount, token) {
+/**
+ * @description Capture a transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {number?} grossAmount Gross amount from a transaction
+ * @param {string} token midtrans server key
+ */
+function captureTransaction(isProduction, orderID, grossAmount, token) {
     return __awaiter(this, void 0, void 0, function* () {
         const postBody = {
-            "transaction_id": orderID
+            transaction_id: orderID,
         };
         if (grossAmount)
-            postBody["gross_amount"] = Math.floor(grossAmount);
+            postBody.gross_amount = Math.floor(grossAmount);
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post("/capture", postBody);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post('/capture', postBody);
             return data;
         }
         catch (e) {
@@ -30,4 +38,4 @@ function CaptureTransaction(isProduction, orderID, grossAmount, token) {
         }
     });
 }
-exports.default = CaptureTransaction;
+exports.captureTransaction = captureTransaction;

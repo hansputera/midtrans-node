@@ -12,16 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.pointInquiry = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function PointInquiry(isProduction, tokenId, grossAmount, token) {
+/**
+ * @description Get point inquiry.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} tokenId A token id
+ * @param {?number} grossAmount Gross amount
+ * @param {string} token midtrans server key
+ */
+function pointInquiry(isProduction, tokenId, grossAmount, token) {
     return __awaiter(this, void 0, void 0, function* () {
         const getBody = {};
         if (grossAmount)
-            getBody["gross_amount"] = grossAmount;
+            getBody.gross_amount = grossAmount;
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).get(`/point_inquiry/${tokenId}`, {
-                data: getBody
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).get(`/point_inquiry/${tokenId}`, {
+                data: getBody,
             });
             return data;
         }
@@ -30,4 +38,4 @@ function PointInquiry(isProduction, tokenId, grossAmount, token) {
         }
     });
 }
-exports.default = PointInquiry;
+exports.pointInquiry = pointInquiry;

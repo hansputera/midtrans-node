@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../../Util/ApiRequest"));
+exports.disableSubscription = void 0;
+const ApiRequest_1 = require("../../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../../Util/MidtransNodeError"));
-function DisableSubscription(isProduction, subscriptionId, token) {
+/**
+ * @description Disable a subscription
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} subscriptionId subscription id want to disable
+ * @param {token} token midtrans server key
+ */
+function disableSubscription(isProduction, subscriptionId, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v1", token).post(`/subscriptions/${subscriptionId}/disable`);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v1', token).post(`/subscriptions/${subscriptionId}/disable`);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function DisableSubscription(isProduction, subscriptionId, token) {
         }
     });
 }
-exports.default = DisableSubscription;
+exports.disableSubscription = disableSubscription;

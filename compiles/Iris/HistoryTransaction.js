@@ -12,27 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.historyTransaction = void 0;
 const luxon_1 = require("luxon");
-const IrisRequest_1 = __importDefault(require("../Util/IrisRequest"));
+const IrisRequest_1 = require("../Util/IrisRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
 const date = new Date();
 const struDate = {
     year: date.getFullYear(),
     month: date.getMonth() + 1,
     days: date.getDate(),
-    _date: luxon_1.DateTime.now()
+    _date: luxon_1.DateTime.now(),
 };
 const minusDate = (date, days) => {
     let minDate;
     if (!date)
         minDate = luxon_1.DateTime.now().minus({ days });
-    else
-        minDate = luxon_1.DateTime.fromObject({ year: date.year, month: date.month, day: date.days });
+    else {
+        minDate = luxon_1.DateTime.fromObject({
+            year: date.year,
+            month: date.month,
+            day: date.days,
+        });
+    }
     const struMinDate = {
         year: minDate.toJSDate().getFullYear(),
         month: minDate.toJSDate().getMonth() + 1,
         days: minDate.toJSDate().getDate(),
-        _date: minDate
+        _date: minDate,
     };
     return struMinDate;
 };
@@ -40,27 +46,40 @@ const plussDate = (date, days) => {
     let plusDate;
     if (!date)
         plusDate = luxon_1.DateTime.now().plus({ days });
-    else
-        plusDate = luxon_1.DateTime.fromObject({ year: date.year, month: date.month, day: date.days }).plus({ days });
+    else {
+        plusDate = luxon_1.DateTime.fromObject({
+            year: date.year,
+            month: date.month,
+            day: date.days,
+        }).plus({ days });
+    }
     const struPlusDate = {
         year: plusDate.toJSDate().getFullYear(),
         month: plusDate.toJSDate().getMonth() + 1,
         days: plusDate.toJSDate().getDate(),
-        _date: plusDate
+        _date: plusDate,
     };
     return struPlusDate;
 };
 const validDate = (d) => {
     const date_d = new Date();
-    if (d.year !== date_d.getFullYear() || !/[0-9]/g.test(d.year.toString()))
-        throw new MidtransNodeError_1.default("Invalid year date");
+    if (d.year !== date_d.getFullYear() || !/[0-9]/g.test(d.year.toString())) {
+        throw new MidtransNodeError_1.default('Invalid year date');
+    }
     const month = date_d.getMonth() + 1;
     if (d.month > month || !/[0-9]/g.test(d.month.toString()))
-        throw new MidtransNodeError_1.default("Invalid Month date");
+        throw new MidtransNodeError_1.default('Invalid Month date');
     else if (!/[0-9]/g.test(d.days.toString()))
-        throw new MidtransNodeError_1.default("Invalid days date");
+        throw new MidtransNodeError_1.default('Invalid days date');
 };
-function HistoryTransaction(isProduction, fromDate, toDate, token) {
+/**
+ * @description Get a history transaction by date.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {IStatementDate?} fromDate date to start viewing transaction history.
+ * @param {IStatementDate?} toDate the last date to get the transaction history.
+ * @param {string} token midtrans server key
+ */
+function historyTransaction(isProduction, fromDate, toDate, token) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!fromDate && !toDate) {
             fromDate = struDate;
@@ -72,27 +91,29 @@ function HistoryTransaction(isProduction, fromDate, toDate, token) {
             toDate = plussDate(fromDate, 10);
         validDate(fromDate);
         validDate(toDate);
-        if (!fromDate._date)
+        if (!fromDate._date) {
             fromDate._date = luxon_1.DateTime.fromObject({
                 year: fromDate.year,
                 month: fromDate.month,
-                day: fromDate.days
+                day: fromDate.days,
             });
-        else if (!toDate._date)
+        }
+        else if (!toDate._date) {
             toDate._date = luxon_1.DateTime.fromObject({
                 year: toDate.year,
                 month: toDate.month,
-                day: toDate.days
+                day: toDate.days,
             });
+        }
         // define iso time.
         const isoFromDate = fromDate._date.toISODate();
         const isoToDate = toDate._date.toISODate();
         try {
-            const { data } = yield (0, IrisRequest_1.default)(isProduction, token).get("/statements", {
+            const { data } = yield (0, IrisRequest_1.irisRequest)(isProduction, token).get('/statements', {
                 data: {
                     from_date: isoFromDate,
-                    to_date: isoToDate
-                }
+                    to_date: isoToDate,
+                },
             });
             return data;
         }
@@ -101,4 +122,4 @@ function HistoryTransaction(isProduction, fromDate, toDate, token) {
         }
     });
 }
-exports.default = HistoryTransaction;
+exports.historyTransaction = historyTransaction;

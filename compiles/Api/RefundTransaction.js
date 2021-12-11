@@ -12,12 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.refundTransaction = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function RefundTransaction(isProduction, orderID, args, token) {
+/**
+ * @description Refund a paid transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {IRefundObjRequest} args refund transaction arguments
+ * @param {string} token midtrans server key
+ */
+function refundTransaction(isProduction, orderID, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post(`/${orderID}/refund`, args);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post(`/${orderID}/refund`, args);
             return data;
         }
         catch (e) {
@@ -25,4 +33,4 @@ function RefundTransaction(isProduction, orderID, args, token) {
         }
     });
 }
-exports.default = RefundTransaction;
+exports.refundTransaction = refundTransaction;

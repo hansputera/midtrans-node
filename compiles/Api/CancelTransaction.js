@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.cancelTransaction = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function CancelTransaction(isProduction, orderID, token) {
+/**
+ * @description Canceling an unpaid transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {string} token midtrans server key
+ */
+function cancelTransaction(isProduction, orderID, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post(`/${orderID}/cancel`);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post(`/${orderID}/cancel`);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function CancelTransaction(isProduction, orderID, token) {
         }
     });
 }
-exports.default = CancelTransaction;
+exports.cancelTransaction = cancelTransaction;

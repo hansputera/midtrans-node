@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.approveTransaction = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function ApproveTransaction(isProduction, orderID, token) {
+/**
+ * @description Approve an unpaid transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {string} token midtrans server key
+ */
+function approveTransaction(isProduction, orderID, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post(`/${orderID}/approve`);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post(`/${orderID}/approve`);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function ApproveTransaction(isProduction, orderID, token) {
         }
     });
 }
-exports.default = ApproveTransaction;
+exports.approveTransaction = approveTransaction;

@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../Util/ApiRequest"));
+exports.unbindPayAccount = void 0;
+const ApiRequest_1 = require("../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-function UnbindPayAccount(isProduction, accountID, token) {
+/**
+ * @description Unbind a pay account.
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} accountID Pay Account ID
+ * @param {string} token midtrans server key
+ */
+function unbindPayAccount(isProduction, accountID, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v2", token).post(`/pay/account/${accountID}/unbind`);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v2', token).post(`/pay/account/${accountID}/unbind`);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function UnbindPayAccount(isProduction, accountID, token) {
         }
     });
 }
-exports.default = UnbindPayAccount;
+exports.unbindPayAccount = unbindPayAccount;

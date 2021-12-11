@@ -1,7 +1,7 @@
 {
   "name": "midtrans-node",
-  "version": "1.0.1",
-  "description": "Midtrans connector",
+  "version": "1.0.2",
+  "description": "Midtrans API Wrapper for NodeJS with typescript.",
   "main": "./compiles/index.js",
   "repository": "https://github.com/hansputera/midtrans-node",
   "author": "Hanif",
@@ -20,6 +20,7 @@
     "lint-staged": "^12.1.2",
     "mocha": "^9.1.3",
     "prettier": "2.5.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.5.3"
   },
   "dependencies": {
@@ -27,7 +28,7 @@
     "luxon": "^2.1.1"
   },
   "scripts": {
-    "build": "tsc --build tsconfig.json",
+    "build": "rimraf compiles && tsc --build tsconfig.json",
     "lint": "eslint \"./src/**/*.ts\" --fix",
     "test": "mocha",
     "prepare": "husky install",

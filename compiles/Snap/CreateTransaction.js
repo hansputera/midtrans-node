@@ -12,12 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createTransaction = void 0;
 const MidtransNodeError_1 = __importDefault(require("../Util/MidtransNodeError"));
-const SnapRequest_1 = __importDefault(require("../Util/SnapRequest"));
-function CreateTransaction(isProduction, args, token) {
+const SnapRequest_1 = require("../Util/SnapRequest");
+/**
+ * @description create a transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {SnapTransaction} args create transaction arguments.
+ * @param {?string} token midtrans server key
+ */
+function createTransaction(isProduction, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, SnapRequest_1.default)(isProduction, token).post("/transactions", args);
+            const { data } = yield (0, SnapRequest_1.snapRequest)(isProduction, token).post('/transactions', args);
             return data;
         }
         catch (e) {
@@ -25,4 +32,4 @@ function CreateTransaction(isProduction, args, token) {
         }
     });
 }
-exports.default = CreateTransaction;
+exports.createTransaction = createTransaction;

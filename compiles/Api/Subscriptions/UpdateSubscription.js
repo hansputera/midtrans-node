@@ -12,12 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApiRequest_1 = __importDefault(require("../../Util/ApiRequest"));
+exports.updateSubscription = void 0;
+const ApiRequest_1 = require("../../Util/ApiRequest");
 const MidtransNodeError_1 = __importDefault(require("../../Util/MidtransNodeError"));
-function UpdateSubscription(isProduction, subscriptionId, args, token) {
+/**
+ * @description Update a subscription
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} subscriptionId subscription id want to disable
+ * @param {IUpdateSubcription} args update subscription arguments
+ * @param {token} token midtrans server key
+ */
+function updateSubscription(isProduction, subscriptionId, args, token) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { data } = yield (0, ApiRequest_1.default)(isProduction, "v1", token).patch(`/subscriptions/${subscriptionId}`, args);
+            const { data } = yield (0, ApiRequest_1.apiRequest)(isProduction, 'v1', token).patch(`/subscriptions/${subscriptionId}`, args);
             return data;
         }
         catch (e) {
@@ -25,4 +33,4 @@ function UpdateSubscription(isProduction, subscriptionId, args, token) {
         }
     });
 }
-exports.default = UpdateSubscription;
+exports.updateSubscription = updateSubscription;
