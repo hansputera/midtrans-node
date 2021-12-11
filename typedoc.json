@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["./src"],
+    "includeVersion": true,
+    "name": "Midtrans Node",
+    "pretty": true,
+    "cleanOutputDir": true,
+    "out": "./docs"
+}

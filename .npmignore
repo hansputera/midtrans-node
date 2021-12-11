@@ -1,0 +1,16 @@
+src
+publish.sh
+.prettierignore
+.prettierrc.json
+tsconfig.json
+.eslintignore
+.eslintrc.json
+.husky
+node_modules
+tests
+.mocharc.js
+yarn.lock
+docs
+typedoc.json
+.github
+

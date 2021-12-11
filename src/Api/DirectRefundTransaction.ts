@@ -1,13 +1,26 @@
-import type { IRefundObj, ITransactionFail } from "../Interfaces";
-import ApiRequest from "../Util/ApiRequest";
-import MidtransNodeError from "../Util/MidtransNodeError";
+import type { IRefundObj, ITransactionFail } from '../Interfaces';
+import { apiRequest } from '../Util/ApiRequest';
+import MidtransNodeError from '../Util/MidtransNodeError';
 
-export default async function DirectRefundTransaction(isProduction: boolean, orderID: string, token: string): Promise<IRefundObj | ITransactionFail | undefined>
-{
-    try {
-        const { data }:{ data: IRefundObj | ITransactionFail } = await ApiRequest(isProduction, "v2", token).post(`/${orderID}/refund/online/direct`);
-        return data;
-    } catch(e) {
-        throw new MidtransNodeError(JSON.stringify(e.response.data));
-    }
+/**
+ * @description Direct refund a transaction
+ * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} orderID Transaction order id
+ * @param {string} token midtrans server key
+ */
+export async function directRefundTransaction(
+	isProduction: boolean,
+	orderID: string,
+	token: string
+): Promise<IRefundObj | ITransactionFail | undefined> {
+	try {
+		const { data }: { data: IRefundObj | ITransactionFail } = await apiRequest(
+			isProduction,
+			'v2',
+			token
+		).post(`/${orderID}/refund/online/direct`);
+		return data;
+	} catch (e) {
+		throw new MidtransNodeError(JSON.stringify(e.response.data));
+	}
 }

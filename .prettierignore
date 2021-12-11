@@ -1,0 +1,7 @@
+compiles
+node_modules
+tests
+.github
+.mocharc.js
+*.md
+*.json

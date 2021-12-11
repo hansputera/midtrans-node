@@ -1,4 +1,8 @@
-# Ignoring interfaces and definitions
-src/Interfaces/*.d.ts
-src/Definitions/*d.ts
-compiles/ 
+compiles
+node_modules
+tests
+.husky
+.github
+*.json
+*.md
+*.js
