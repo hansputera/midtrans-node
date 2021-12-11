@@ -9,7 +9,6 @@
         "module": "CommonJS",
         "resolveJsonModule": true,
         "skipDefaultLibCheck": true,
-        "baseUrl": "."
     },
     "exclude": ["node_modules"],
     "include": ["src/**/*", "tests/**/*"]

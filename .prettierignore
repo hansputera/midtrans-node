@@ -1,8 +1,7 @@
 compiles
 node_modules
 tests
-.husky
 .github
-*.json
+.mocharc.js
 *.md
-*.js
+*.json
