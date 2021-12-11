@@ -1,6 +1,6 @@
 {
   "name": "hanif-midtrans-node",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Midtrans API Wrapper for NodeJS with typescript.",
   "main": "./compiles/src/index.js",
   "typings": "./compiles/src/index.d.ts",
