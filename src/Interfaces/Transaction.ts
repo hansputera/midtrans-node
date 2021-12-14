@@ -33,7 +33,7 @@ export type TransactionStatus =
 	| 'expire'
 	| 'failure';
 export type FraudStatus = 'accept' | 'deny' | 'challenge';
-
+export type ActionMethod = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS'; // i think it's a http method.
 export type UnitExpiry = 'second' | 'minute' | 'hour' | 'day';
 
 export interface IRefund {
@@ -102,6 +102,12 @@ export interface IChargeTransactionArgs {
 	metadata: Record<string, unknown>;
 }
 
+export interface Action {
+	url: string;
+	method: ActionMethod;
+	name: string;
+}
+
 export interface IChargeTransactionResult {
 	status_code: string;
 	status_message: string;
@@ -120,4 +126,8 @@ export interface IChargeTransactionResult {
 	bank?: string;
 	transaction_status?: TransactionStatus;
 	signature_key?: string;
+	currency?: string;
+	actions?: Action[];
+	acquirer?: string;
+	qr_string?: string;
 }
