@@ -6,15 +6,15 @@ import MidtransNodeError from '../Util/MidtransNodeError';
  * @description Capture a transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} orderID Transaction order id
- * @param {number?} grossAmount Gross amount from a transaction
  * @param {string} token midtrans server key
+ * @param {number?} grossAmount Gross amount from a transaction
  */
 export async function captureTransaction(
 	isProduction: boolean,
 	orderID: string,
-	grossAmount?: number,
-	token?: string
-): Promise<ITransaction | ITransactionFail | undefined> {
+	token: string,
+	grossAmount?: number
+): Promise<ITransaction | ITransactionFail> {
 	const postBody: {
 		transaction_id: string;
 		gross_amount?: number;

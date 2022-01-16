@@ -12,7 +12,7 @@ export async function statusTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string
-): Promise<ITransactionStatus | ITransactionFail | undefined> {
+): Promise<ITransactionStatus | ITransactionFail> {
 	try {
 		const { data }: { data: ITransactionStatus | ITransactionFail } =
 			await apiRequest(isProduction, 'v2', token).get(`/${orderID}/status`);

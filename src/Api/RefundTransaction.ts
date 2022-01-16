@@ -18,7 +18,7 @@ export async function refundTransaction(
 	orderID: string,
 	args: IRefundObjRequest,
 	token: string
-): Promise<IRefundObj | ITransactionFail | undefined> {
+): Promise<IRefundObj | ITransactionFail> {
 	try {
 		const { data }: { data: IRefundObj | ITransactionFail } = await apiRequest(
 			isProduction,

@@ -12,7 +12,7 @@ export async function directRefundTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string
-): Promise<IRefundObj | ITransactionFail | undefined> {
+): Promise<IRefundObj | ITransactionFail> {
 	try {
 		const { data }: { data: IRefundObj | ITransactionFail } = await apiRequest(
 			isProduction,

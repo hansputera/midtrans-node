@@ -12,7 +12,7 @@ export async function expireTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string
-): Promise<ITransaction | ITransactionFail | undefined> {
+): Promise<ITransaction | ITransactionFail> {
 	try {
 		const { data }: { data: ITransaction | ITransactionFail } =
 			await apiRequest(isProduction, 'v2', token).post(`/${orderID}/expire`);

@@ -1,6 +1,7 @@
 import { apiRequest } from '../Util/ApiRequest';
 import type { ITransaction, ITransactionFail } from '../Interfaces';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Approve an unpaid transaction
@@ -12,12 +13,14 @@ export async function approveTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string
-): Promise<ITransaction | ITransactionFail | undefined> {
+): Promise<ITransaction | ITransactionFail> {
 	try {
 		const { data }: { data: ITransaction | ITransactionFail } =
 			await apiRequest(isProduction, 'v2', token).post(`/${orderID}/approve`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

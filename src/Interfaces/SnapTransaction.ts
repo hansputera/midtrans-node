@@ -67,13 +67,13 @@ export interface FreeTextItem {
 }
 
 export interface SnapItemDetails {
-	id: string;
+	id?: string;
 	price: number;
 	quantity: number;
 	name: string;
-	brand: string;
-	category: string;
-	merchant_name: string;
+	brand?: string;
+	category?: string;
+	merchant_name?: string;
 }
 
 export interface SnapCard {
@@ -116,7 +116,7 @@ export interface SnapAddress {
 
 export interface SnapTransaction {
 	transaction_details: SnapTransactionDetails;
-	item_details?: SnapItemDetails;
+	item_details?: SnapItemDetails[];
 	customer_details?: SnapCustomerDetails;
 	enabled_payments?: PaymentType;
 	credit_card?: SnapCard;

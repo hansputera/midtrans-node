@@ -41,7 +41,6 @@ import {
 	topupChannels,
 } from './Iris';
 
-import { version } from '../package.json';
 import type {
 	SnapTransaction,
 	IPayoutRequest,
@@ -84,15 +83,10 @@ import type {
  */
 export class MidtransNode {
 	/**
-	 * @param {boolean} isProduction Ready to production?
+	 * @param {boolean} isProduction Are you ready to production?
 	 * @param {string} authKey Your midtrans server-key
 	 */
 	constructor(public isProduction: boolean, public authKey: string) {}
-
-	/**
-	 * Package version
-	 */
-	public version = version;
 
 	/**
 	 * @param {SnapTransaction} args - Create Transaction Arguments.
@@ -115,8 +109,8 @@ export class MidtransNode {
 		await captureTransaction(
 			this.isProduction,
 			orderID,
-			grossAmount,
-			this.authKey
+			this.authKey,
+			grossAmount
 		);
 
 	/**
