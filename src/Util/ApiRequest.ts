@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import { version } from '../../package.json';
 
 /**
  * @description get axios request instance.
@@ -18,7 +17,7 @@ export function apiRequest(
 	return axios.create({
 		baseURL,
 		headers: {
-			'User-Agent': `Midtrans-Node/${version}`,
+			'User-Agent': `Midtrans-Node`,
 		},
 		auth: {
 			username: token,

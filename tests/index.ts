@@ -14,7 +14,12 @@ describe('midtrans', () => {
                     last_name: 'Roth',
                     email: 'brianroth@example.com',
                     enabled_payments: ['akulaku', 'indomaret', 'gopay', 'shopeepay']
-                }
+                },
+                item_details: [{
+                    name: 'Baby Pants',
+                    quantity: 2,
+                    price: 20_000, // IDR
+                }]
             }).then((transaction) => {
                 // transaction => { token: '', redirect_url: '' }
                 console.log(transaction);

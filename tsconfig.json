@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "alwaysStrict": true,
         "esModuleInterop": true,
         "declaration": true,
-        "outDir": "./compiles",
+        "outDir": "./dist",
         "target": "ES6",
         "module": "CommonJS",
-        "resolveJsonModule": true,
         "skipDefaultLibCheck": true,
+        "strict": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true
     },
-    "exclude": ["node_modules", "tests"],
+    "exclude": ["node_modules"],
     "include": ["src/**/*"]
 } 

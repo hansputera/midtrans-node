@@ -5,6 +5,7 @@ import type {
 } from '../Interfaces';
 import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Refund a paid transaction
@@ -18,7 +19,7 @@ export async function refundTransaction(
 	orderID: string,
 	args: IRefundObjRequest,
 	token: string
-): Promise<IRefundObj | ITransactionFail | undefined> {
+): Promise<IRefundObj | ITransactionFail> {
 	try {
 		const { data }: { data: IRefundObj | ITransactionFail } = await apiRequest(
 			isProduction,
@@ -27,6 +28,8 @@ export async function refundTransaction(
 		).post(`/${orderID}/refund`, args);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

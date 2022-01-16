@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import type { IStatementDate, IStatementResult } from '../Interfaces';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 const date = new Date();
 const struDate: IStatementDate = {
@@ -65,23 +66,27 @@ const validDate = (d: IStatementDate) => {
 /**
  * @description Get a history transaction by date.
  * @param {boolean} isProduction Production/Sandbox mode
+ * @param {string} token midtrans server key
  * @param {IStatementDate?} fromDate date to start viewing transaction history.
  * @param {IStatementDate?} toDate the last date to get the transaction history.
- * @param {string} token midtrans server key
  */
 export async function historyTransaction(
 	isProduction: boolean,
+	token: string,
 	fromDate?: IStatementDate,
-	toDate?: IStatementDate,
-	token?: string
-): Promise<IStatementResult[] | undefined> {
+	toDate?: IStatementDate
+): Promise<IStatementResult[]> {
 	if (!fromDate && !toDate) {
 		fromDate = struDate;
 		toDate = minusDate(struDate, 10);
-	} else if (!fromDate) fromDate = minusDate(toDate, 10);
-	else if (!toDate) toDate = plussDate(fromDate, 10);
+	} else if (!fromDate) {
+		fromDate = minusDate(toDate, 10);
+	} else if (!toDate) {
+		toDate = plussDate(fromDate, 10);
+	}
+
 	validDate(fromDate);
-	validDate(toDate);
+	validDate(toDate!);
 
 	if (!fromDate._date) {
 		fromDate._date = DateTime.fromObject({
@@ -89,17 +94,17 @@ export async function historyTransaction(
 			month: fromDate.month,
 			day: fromDate.days,
 		});
-	} else if (!toDate._date) {
-		toDate._date = DateTime.fromObject({
-			year: toDate.year,
-			month: toDate.month,
-			day: toDate.days,
+	} else if (!toDate?._date) {
+		toDate!._date = DateTime.fromObject({
+			year: toDate?.year,
+			month: toDate?.month,
+			day: toDate?.days,
 		});
 	}
 
 	// define iso time.
 	const isoFromDate = fromDate._date.toISODate();
-	const isoToDate = toDate._date.toISODate();
+	const isoToDate = toDate?._date?.toISODate();
 	try {
 		const { data }: { data: IStatementResult[] } = await irisRequest(
 			isProduction,
@@ -112,6 +117,8 @@ export async function historyTransaction(
 		});
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

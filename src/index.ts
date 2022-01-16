@@ -41,7 +41,6 @@ import {
 	topupChannels,
 } from './Iris';
 
-import { version } from '../package.json';
 import type {
 	SnapTransaction,
 	IPayoutRequest,
@@ -84,15 +83,10 @@ import type {
  */
 export class MidtransNode {
 	/**
-	 * @param {boolean} isProduction Ready to production?
+	 * @param {boolean} isProduction Are you ready to production?
 	 * @param {string} authKey Your midtrans server-key
 	 */
 	constructor(public isProduction: boolean, public authKey: string) {}
-
-	/**
-	 * Package version
-	 */
-	public version = version;
 
 	/**
 	 * @param {SnapTransaction} args - Create Transaction Arguments.
@@ -115,8 +109,8 @@ export class MidtransNode {
 		await captureTransaction(
 			this.isProduction,
 			orderID,
-			grossAmount,
-			this.authKey
+			this.authKey,
+			grossAmount
 		);
 
 	/**
@@ -219,7 +213,7 @@ export class MidtransNode {
 		tokenId: string,
 		grossAmount?: number
 	): Promise<IPointInquiry | undefined> =>
-		await pointInquiry(this.isProduction, tokenId, grossAmount, this.authKey);
+		await pointInquiry(this.isProduction, tokenId, this.authKey, grossAmount);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -398,7 +392,7 @@ export class MidtransNode {
 		fromDate?: IStatementDate,
 		toDate?: IStatementDate
 	): Promise<IStatementResult[] | undefined> =>
-		await historyTransaction(this.isProduction, fromDate, toDate, this.authKey);
+		await historyTransaction(this.isProduction, this.authKey, fromDate, toDate);
 
 	/**
 	 * @description Provide top up information channel for Aggregator Partner

@@ -1,6 +1,7 @@
 import type { IBeneficiaries, ISuccessBeneficiaries } from '../Interfaces';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Create beneficiaries.
@@ -20,6 +21,8 @@ export async function createBeneficiaries(
 		).post('/beneficiaries', args);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

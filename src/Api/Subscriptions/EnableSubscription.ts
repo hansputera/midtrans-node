@@ -1,5 +1,6 @@
 import { apiRequest } from '../../Util/ApiRequest';
 import MidtransNodeError from '../../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Enable a subscription
@@ -20,6 +21,8 @@ export async function enableSubscription(
 		).post(`/subscriptions/${subscriptionId}/enable`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

@@ -1,6 +1,7 @@
 import type { BeneficiaryBank } from '../Interfaces';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Get beneficiary banks.
@@ -18,6 +19,8 @@ export async function beneficiaryBanks(
 		).get('/beneficiary_banks');
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

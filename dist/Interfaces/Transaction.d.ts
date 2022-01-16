@@ -1,6 +1,5 @@
 import type { SnapTransaction } from './SnapTransaction';
-
-export type PaymentType =
+export declare type PaymentType =
 	| 'gopay'
 	| 'shopeepay'
 	| 'qris'
@@ -19,7 +18,7 @@ export type PaymentType =
 	| 'bni_va'
 	| 'bri_va'
 	| 'indomaret';
-export type TransactionStatus =
+export declare type TransactionStatus =
 	| 'authorize'
 	| 'capture'
 	| 'settlement'
@@ -32,10 +31,14 @@ export type TransactionStatus =
 	| 'partial_chargeback'
 	| 'expire'
 	| 'failure';
-export type FraudStatus = 'accept' | 'deny' | 'challenge';
-
-export type UnitExpiry = 'second' | 'minute' | 'hour' | 'day';
-
+export declare type FraudStatus = 'accept' | 'deny' | 'challenge';
+export declare type ActionMethod =
+	| 'GET'
+	| 'POST'
+	| 'DELETE'
+	| 'PUT'
+	| 'OPTIONS';
+export declare type UnitExpiry = 'second' | 'minute' | 'hour' | 'day';
 export interface IRefund {
 	refund_chargeback_id: number;
 	refund_amount: string;
@@ -64,17 +67,14 @@ export interface ITransaction {
 	refunds?: IRefund;
 	bill_key?: string;
 }
-
 export interface ITransactionStatus extends ITransaction {
 	approval_code: string;
 	signature_key: string;
 }
-
 export interface ITransactionFail {
 	status_code: string;
 	status_message: string;
 }
-
 export interface IChargeTransactionArgs {
 	payment_type: PaymentType;
 	transaction_details: SnapTransaction['transaction_details'];
@@ -98,10 +98,13 @@ export interface IChargeTransactionArgs {
 		expiry_duration: number;
 		unit?: UnitExpiry;
 	};
-	// you can put anything you want.
 	metadata: Record<string, unknown>;
 }
-
+export interface Action {
+	url: string;
+	method: ActionMethod;
+	name: string;
+}
 export interface IChargeTransactionResult {
 	status_code: string;
 	status_message: string;
@@ -120,4 +123,8 @@ export interface IChargeTransactionResult {
 	bank?: string;
 	transaction_status?: TransactionStatus;
 	signature_key?: string;
+	currency?: string;
+	actions?: Action[];
+	acquirer?: string;
+	qr_string?: string;
 }

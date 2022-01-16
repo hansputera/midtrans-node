@@ -1,6 +1,7 @@
 import type { ITransactionStatus, ITransactionFail } from '../Interfaces';
 import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Get a status of transaction
@@ -12,12 +13,14 @@ export async function statusTransaction(
 	isProduction: boolean,
 	orderID: string,
 	token: string
-): Promise<ITransactionStatus | ITransactionFail | undefined> {
+): Promise<ITransactionStatus | ITransactionFail> {
 	try {
 		const { data }: { data: ITransactionStatus | ITransactionFail } =
 			await apiRequest(isProduction, 'v2', token).get(`/${orderID}/status`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

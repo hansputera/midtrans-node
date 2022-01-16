@@ -1,6 +1,7 @@
 import MidtransNodeError from '../Util/MidtransNodeError';
 import type { IValidateBankResult } from '../Interfaces';
 import { irisRequest } from '../Util/IrisRequest';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Validate a bank account
@@ -30,6 +31,8 @@ export async function validateBankAccount(
 		);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

@@ -1,8 +1,8 @@
 {
   "name": "hanif-midtrans-node",
-  "version": "1.0.7",
+  "version": "1.1.4",
   "description": "Midtrans API Wrapper for NodeJS with typescript.",
-  "main": "./compiles/index.js",
+  "main": "./dist/index.js",
   "repository": "https://github.com/hansputera/midtrans-node",
   "author": "Hanif",
   "license": "MIT",
@@ -22,11 +22,11 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.22.10",
-    "typescript": "^4.5.3"
+    "typescript": "^4.6.0-dev.20220116"
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "luxon": "^2.1.1"
+    "luxon": "^2.3.0"
   },
   "scripts": {
     "build": "rimraf compiles && tsc --build tsconfig.json",

@@ -4,6 +4,7 @@ import type {
 } from '../Interfaces/Payouts';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Approve a payouts
@@ -23,6 +24,8 @@ export async function approvePayouts(
 		).post('/payouts/approve', args);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }
