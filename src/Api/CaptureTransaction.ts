@@ -1,6 +1,7 @@
 import { apiRequest } from '../Util/ApiRequest';
 import type { ITransaction, ITransactionFail } from '../Interfaces';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Capture a transaction
@@ -27,6 +28,8 @@ export async function captureTransaction(
 			await apiRequest(isProduction, 'v2', token).post('/capture', postBody);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

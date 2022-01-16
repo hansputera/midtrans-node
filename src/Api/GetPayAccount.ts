@@ -1,6 +1,7 @@
 import type { IPayAccount } from '../Interfaces';
 import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Get pay account details
@@ -21,6 +22,8 @@ export async function getPayAccount(
 		).get(`/pay/account/${accountID}`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

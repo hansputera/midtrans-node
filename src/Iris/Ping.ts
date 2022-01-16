@@ -1,5 +1,6 @@
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Ping iris api.
@@ -17,6 +18,8 @@ export async function ping(
 		).get('/ping');
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

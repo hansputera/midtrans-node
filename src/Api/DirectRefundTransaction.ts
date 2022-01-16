@@ -1,6 +1,7 @@
 import type { IRefundObj, ITransactionFail } from '../Interfaces';
 import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Direct refund a transaction
@@ -21,6 +22,8 @@ export async function directRefundTransaction(
 		).post(`/${orderID}/refund/online/direct`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

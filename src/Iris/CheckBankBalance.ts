@@ -1,6 +1,7 @@
 import type { ICheckBalanceBank } from '../Interfaces';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Check bank balance from a bank account id
@@ -20,6 +21,8 @@ export async function checkBankBalance(
 		).get(`/${bankAccountId}/balance`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

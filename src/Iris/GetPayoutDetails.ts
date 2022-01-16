@@ -1,6 +1,7 @@
 import type { IPayout } from '../Interfaces/Payouts';
 import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Get payout details
@@ -20,6 +21,8 @@ export async function getPayoutDetails(
 		).get(`/payouts/${refNo}`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

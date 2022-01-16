@@ -213,7 +213,7 @@ export class MidtransNode {
 		tokenId: string,
 		grossAmount?: number
 	): Promise<IPointInquiry | undefined> =>
-		await pointInquiry(this.isProduction, tokenId, grossAmount, this.authKey);
+		await pointInquiry(this.isProduction, tokenId, this.authKey, grossAmount);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -392,7 +392,7 @@ export class MidtransNode {
 		fromDate?: IStatementDate,
 		toDate?: IStatementDate
 	): Promise<IStatementResult[] | undefined> =>
-		await historyTransaction(this.isProduction, fromDate, toDate, this.authKey);
+		await historyTransaction(this.isProduction, this.authKey, fromDate, toDate);
 
 	/**
 	 * @description Provide top up information channel for Aggregator Partner

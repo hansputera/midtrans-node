@@ -4,6 +4,7 @@ import type {
 } from '../Interfaces';
 import MidtransNodeError from '../Util/MidtransNodeError';
 import { apiRequest } from '../Util/ApiRequest';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Charge an unpaid transaction
@@ -25,6 +26,8 @@ export async function chargeTransaction(
 
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }

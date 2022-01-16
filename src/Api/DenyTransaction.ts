@@ -1,6 +1,7 @@
 import type { ITransaction, ITransactionFail } from '../Interfaces';
 import { apiRequest } from '../Util/ApiRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
+import type { AxiosError } from 'axios';
 
 /**
  * @description Deny a transaction
@@ -18,6 +19,8 @@ export async function denyTransaction(
 			await apiRequest(isProduction, 'v2', token).post(`/${orderID}/deny`);
 		return data;
 	} catch (e) {
-		throw new MidtransNodeError(JSON.stringify(e.response.data));
+		throw new MidtransNodeError(
+			JSON.stringify((e as AxiosError).response?.data)
+		);
 	}
 }
