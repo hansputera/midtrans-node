@@ -29,7 +29,6 @@
   "scripts": {
     "build": "rimraf dist && tsc --build tsconfig.json",
     "lint": "eslint \"./src/**/*.ts\" --fix",
-    "test": "mocha",
     "prepare": "husky install",
     "format": "prettier --write \"./src/**/*.+(ts|.d.ts)\"",
     "docs": "typedoc"
