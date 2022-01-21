@@ -413,6 +413,15 @@ class MidtransNode {
 			authKey,
 		};
 	}
+	/**
+	 * Set override notification url.
+	 * @param {string[] | string} urls Website URL(s)
+	 * @return {MidtransNode}
+	 */
+	setOverrideNotificationURL(urls) {
+		this.config.overrideNotificationUrls = urls;
+		return this;
+	}
 }
 exports.MidtransNode = MidtransNode;
 exports.default = MidtransNode;

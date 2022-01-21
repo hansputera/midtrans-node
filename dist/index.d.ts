@@ -46,6 +46,12 @@ export declare class MidtransNode {
 	 */
 	constructor(isProduction: boolean, authKey: string);
 	/**
+	 * Set override notification url.
+	 * @param {string[] | string} urls Website URL(s)
+	 * @return {MidtransNode}
+	 */
+	setOverrideNotificationURL(urls: string[] | string): MidtransNode;
+	/**
 	 * @param {SnapTransaction} args - Create Transaction Arguments.
 	 * @description More info: https://snap-docs.midtrans.com
 	 */
