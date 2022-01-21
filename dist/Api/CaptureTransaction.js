@@ -47,7 +47,7 @@ const MidtransNodeError_1 = __importDefault(
  * @description Capture a transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} orderID Transaction order id
- * @param {string} token midtrans server key
+ * @param {string} token midtrans auth key
  * @param {number?} grossAmount Gross amount from a transaction
  */
 function captureTransaction(isProduction, orderID, token, grossAmount) {

@@ -12,20 +12,21 @@ const axios_1 = __importDefault(require('axios'));
  * @param {boolean} production Production mode?
  * @param {string} versionApi API Version (2 or 1)
  * @param {string} token midtrans server key
+ * @param {AxiosRequestConfig} options Axios options
+ * @return {AxiosInstance}
  */
-function apiRequest(production, versionApi = 'v2', token) {
+function apiRequest(production, versionApi = 'v2', token, options) {
 	const baseURL = production
 		? `https://api.midtrans.com/${versionApi}`
 		: `https://api.sandbox.midtrans.com/${versionApi}`;
-	return axios_1.default.create({
-		baseURL,
-		headers: {
-			'User-Agent': `Midtrans-Node`,
-		},
-		auth: {
-			username: token,
-			password: '',
-		},
-	});
+	return axios_1.default.create(
+		Object.assign(Object.assign({}, options), {
+			baseURL,
+			auth: {
+				username: token,
+				password: '',
+			},
+		})
+	);
 }
 exports.apiRequest = apiRequest;

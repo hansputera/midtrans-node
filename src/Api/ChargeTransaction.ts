@@ -10,7 +10,7 @@ import type { AxiosError } from 'axios';
  * @description Charge an unpaid transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {IChargeTransactionArgs} args Charge transaction arguments
- * @param {string} token midtrans server key
+ * @param {string} token midtrans auth key
  */
 export async function chargeTransaction(
 	isProduction: boolean,

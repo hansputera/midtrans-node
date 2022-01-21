@@ -76,8 +76,6 @@ class MidtransNode {
 	 * @param {string} authKey Your midtrans server-key
 	 */
 	constructor(isProduction, authKey) {
-		this.isProduction = isProduction;
-		this.authKey = authKey;
 		/**
 		 * @param {SnapTransaction} args - Create Transaction Arguments.
 		 * @description More info: https://snap-docs.midtrans.com
@@ -85,7 +83,7 @@ class MidtransNode {
 		this.createTransaction = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Snap_1.createTransaction)(this.isProduction, args, this.authKey);
+				Snap_1.createTransaction)(this.config.productionMode, args, this.config);
 			});
 		/**
 		 * @param {string} orderID - Transaction id from charge response
@@ -95,7 +93,7 @@ class MidtransNode {
 		this.captureTransaction = (orderID, grossAmount) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.captureTransaction)(this.isProduction, orderID, this.authKey, grossAmount);
+				Api_1.captureTransaction)(this.config.productionMode, orderID, this.config.authKey, grossAmount);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -104,7 +102,7 @@ class MidtransNode {
 		this.cancelTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.cancelTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.cancelTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -113,7 +111,7 @@ class MidtransNode {
 		this.approveTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.approveTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.approveTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -122,7 +120,7 @@ class MidtransNode {
 		this.denyTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.denyTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.denyTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -132,7 +130,7 @@ class MidtransNode {
 		this.refundTransaction = (orderID, args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.refundTransaction)(this.isProduction, orderID, args, this.authKey);
+				Api_1.refundTransaction)(this.config.productionMode, orderID, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -141,7 +139,7 @@ class MidtransNode {
 		this.directRefundTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.directRefundTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.directRefundTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -150,7 +148,7 @@ class MidtransNode {
 		this.statusTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.statusTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.statusTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -161,7 +159,7 @@ class MidtransNode {
 		this.statusb2bTransaction = (orderID, page = 0, perPage = 10) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.statusB2bTransaction)(this.isProduction, orderID, page, perPage, this.authKey);
+				Api_1.statusB2bTransaction)(this.config.productionMode, orderID, page, perPage, this.config.authKey);
 			});
 		/**
 		 * @param {IRegisterCardRequest} args - Request Register Card Object includes card_number,card_exp_month,card_exp_year,client_key,callback.
@@ -170,7 +168,7 @@ class MidtransNode {
 		this.registerCard = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.registerCard)(this.isProduction, args, this.authKey);
+				Api_1.registerCard)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} tokenId - Card Token
@@ -180,7 +178,7 @@ class MidtransNode {
 		this.pointInquiry = (tokenId, grossAmount) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.pointInquiry)(this.isProduction, tokenId, this.authKey, grossAmount);
+				Api_1.pointInquiry)(this.config.productionMode, tokenId, this.config.authKey, grossAmount);
 			});
 		/**
 		 * @param {string} orderID - Transaction ID given by Midtrans
@@ -189,16 +187,17 @@ class MidtransNode {
 		this.expireTransaction = (orderID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.expireTransaction)(this.isProduction, orderID, this.authKey);
+				Api_1.expireTransaction)(this.config.productionMode, orderID, this.config.authKey);
 			});
 		/**
+		 *
 		 * @param {ICreatePayAccount} args - Pay Account Request Object
 		 * @description More info: https://api-docs.midtrans.com/#create-pay-account
 		 */
 		this.createPayAccount = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.createPayAccount)(this.isProduction, args, this.authKey);
+				Api_1.createPayAccount)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} accountID - Pay Account ID
@@ -207,7 +206,7 @@ class MidtransNode {
 		this.getPayAccount = (accountID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.getPayAccount)(this.isProduction, accountID, this.authKey);
+				Api_1.getPayAccount)(this.config.productionMode, accountID, this.config.authKey);
 			});
 		/**
 		 * @param {string} accountID - Pay Account ID
@@ -216,7 +215,7 @@ class MidtransNode {
 		this.unbindPayAccount = (accountID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.unbindPayAccount)(this.isProduction, accountID, this.authKey);
+				Api_1.unbindPayAccount)(this.config.productionMode, accountID, this.config.authKey);
 			});
 		/**
 		 * @param {number} binNumber - Bin ID want to check.
@@ -225,7 +224,7 @@ class MidtransNode {
 		this.getBin = (binNumber) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.getBinNumber)(this.isProduction, binNumber, this.authKey);
+				Api_1.getBinNumber)(this.config.productionMode, binNumber, this.config.authKey);
 			});
 		/**
 		 * @param {ICreateSubcription} args - Subscription Request object.
@@ -234,7 +233,7 @@ class MidtransNode {
 		this.createSubscription = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.createSubscription)(this.isProduction, args, this.authKey);
+				Api_1.createSubscription)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -243,7 +242,7 @@ class MidtransNode {
 		this.getSubscription = (subscriptionId) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.getSubscription)(this.isProduction, subscriptionId, this.authKey);
+				Api_1.getSubscription)(this.config.productionMode, subscriptionId, this.config.authKey);
 			});
 		/**
 		 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -253,7 +252,7 @@ class MidtransNode {
 		this.updateSubscription = (subscriptionId, args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.updateSubscription)(this.isProduction, subscriptionId, args, this.authKey);
+				Api_1.updateSubscription)(this.config.productionMode, subscriptionId, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -262,7 +261,7 @@ class MidtransNode {
 		this.disableSubscription = (subscriptionId) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.disableSubscription)(this.isProduction, subscriptionId, this.authKey);
+				Api_1.disableSubscription)(this.config.productionMode, subscriptionId, this.config.authKey);
 			});
 		/**
 		 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -271,14 +270,15 @@ class MidtransNode {
 		this.enableSubscription = (subscriptionId) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.enableSubscription)(this.isProduction, subscriptionId, this.authKey);
+				Api_1.enableSubscription)(this.config.productionMode, subscriptionId, this.config.authKey);
 			});
 		/**
 		 * @description Returns pong message for monitoring purpose
 		 */
 		this.ping = () =>
 			__awaiter(this, void 0, void 0, function* () {
-				return yield (0, Iris_1.ping)(this.isProduction, this.authKey);
+				return yield (0,
+				Iris_1.ping)(this.config.productionMode, this.config.authKey);
 			});
 		/**
 		 * @param {IBeneficiaries} args - Beneficiaries request object
@@ -287,7 +287,7 @@ class MidtransNode {
 		this.createBeneficiaries = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.createBeneficiaries)(this.isProduction, args, this.authKey);
+				Iris_1.createBeneficiaries)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} aliasName - Identifier name.
@@ -297,7 +297,7 @@ class MidtransNode {
 		this.updateBeneficiaries = (aliasName, args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.updateBeneficiaries)(this.isProduction, aliasName, args, this.authKey);
+				Iris_1.updateBeneficiaries)(this.config.productionMode, aliasName, args, this.config.authKey);
 			});
 		/**
 		 * @param {number} limit - Limit data beneficiaries.
@@ -306,7 +306,7 @@ class MidtransNode {
 		this.listBeneficiaries = (limit = 10) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.listBeneficiaries)(this.isProduction, limit, this.authKey);
+				Iris_1.listBeneficiaries)(this.config.productionMode, limit, this.config.authKey);
 			});
 		/**
 		 * @param {IPayoutRequest} args - Payout request object.
@@ -315,7 +315,7 @@ class MidtransNode {
 		this.createPayouts = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.createPayouts)(this.isProduction, args, this.authKey);
+				Iris_1.createPayouts)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {IPayoutApproveRequest} args - Payout approve request object
@@ -324,7 +324,7 @@ class MidtransNode {
 		this.approvePayouts = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.approvePayouts)(this.isProduction, args, this.authKey);
+				Iris_1.approvePayouts)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {IPayoutRejectRequest} args - Payout reject request object
@@ -333,7 +333,7 @@ class MidtransNode {
 		this.rejectPayouts = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.rejectPayouts)(this.isProduction, args, this.authKey);
+				Iris_1.rejectPayouts)(this.config.productionMode, args, this.config.authKey);
 			});
 		/**
 		 * @param {string} refNo - Unique reference_no of a payout
@@ -342,7 +342,7 @@ class MidtransNode {
 		this.getPayoutDetails = (refNo) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.getPayoutDetails)(this.isProduction, refNo, this.authKey);
+				Iris_1.getPayoutDetails)(this.config.productionMode, refNo, this.config.authKey);
 			});
 		/**
 		 * @param {IStatementDate} fromDate - start date range for payouts (YYYY-MM-DD)
@@ -352,21 +352,23 @@ class MidtransNode {
 		this.historyTransaction = (fromDate, toDate) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.historyTransaction)(this.isProduction, this.authKey, fromDate, toDate);
+				Iris_1.historyTransaction)(this.config.productionMode, this.config.authKey, fromDate, toDate);
 			});
 		/**
 		 * @description Provide top up information channel for Aggregator Partner
 		 */
 		this.topupChannels = () =>
 			__awaiter(this, void 0, void 0, function* () {
-				return yield (0, Iris_1.topupChannels)(this.isProduction, this.authKey);
+				return yield (0,
+				Iris_1.topupChannels)(this.config.productionMode, this.config.authKey);
 			});
 		/**
 		 * @description Show list of registered bank accounts for facilitator partner. More info: https://iris-docs.midtrans.com/#bank-accounts-facilitator
 		 */
 		this.bankAccounts = () =>
 			__awaiter(this, void 0, void 0, function* () {
-				return yield (0, Iris_1.bankAccounts)(this.isProduction, this.authKey);
+				return yield (0,
+				Iris_1.bankAccounts)(this.config.productionMode, this.config.authKey);
 			});
 		/**
 		 * @param {string} bankAccountID - Bank account ID to be used when creating payouts
@@ -375,7 +377,7 @@ class MidtransNode {
 		this.checkBankBalance = (bankAccountID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.checkBankBalance)(this.isProduction, bankAccountID, this.authKey);
+				Iris_1.checkBankBalance)(this.config.productionMode, bankAccountID, this.config.authKey);
 			});
 		/**
 		 * @description - Show list of supported banks in IRIS. More info: https://iris-docs.midtrans.com/#list-banks
@@ -383,7 +385,7 @@ class MidtransNode {
 		this.listBanks = () =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.beneficiaryBanks)(this.isProduction, this.authKey);
+				Iris_1.beneficiaryBanks)(this.config.productionMode, this.config.authKey);
 			});
 		/**
 		 * @param {string} bankName - Bank code
@@ -393,15 +395,26 @@ class MidtransNode {
 		this.validateBankAccount = (bankName, accountID) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Iris_1.validateBankAccount)(this.isProduction, bankName, accountID, this.authKey);
+				Iris_1.validateBankAccount)(this.config.productionMode, bankName, accountID, this.config.authKey);
 			});
+		/**
+		 * Charge transaction.
+		 *
+		 * @param {IChargeTransactionArgs} args Charge transaction arguments/
+		 * @return {Promise<IChargeTransactionResult | undefined>}
+		 */
 		this.chargeTransaction = (args) =>
 			__awaiter(this, void 0, void 0, function* () {
 				return yield (0,
-				Api_1.chargeTransaction)(this.isProduction, args, this.authKey);
+				Api_1.chargeTransaction)(this.config.productionMode, args, this.config.authKey);
 			});
+		this.config = {
+			productionMode: isProduction,
+			authKey,
+		};
 	}
 }
 exports.MidtransNode = MidtransNode;
 exports.default = MidtransNode;
 __exportStar(require('./Interfaces'), exports);
+__exportStar(require('./Util/Utility'), exports);

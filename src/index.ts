@@ -76,17 +76,25 @@ import type {
 	IValidateBankResult,
 	IChargeTransactionArgs,
 	IChargeTransactionResult,
+	IConfig,
 } from './Interfaces';
 
 /**
  * @class MidtransNode
  */
 export class MidtransNode {
+	public config: IConfig;
+
 	/**
 	 * @param {boolean} isProduction Are you ready to production?
 	 * @param {string} authKey Your midtrans server-key
 	 */
-	constructor(public isProduction: boolean, public authKey: string) {}
+	constructor(isProduction: boolean, authKey: string) {
+		this.config = {
+			productionMode: isProduction,
+			authKey,
+		};
+	}
 
 	/**
 	 * @param {SnapTransaction} args - Create Transaction Arguments.
@@ -95,7 +103,7 @@ export class MidtransNode {
 	public createTransaction = async (
 		args: SnapTransaction
 	): Promise<{ token: string; redirect_url: string } | undefined> =>
-		await createTransaction(this.isProduction, args, this.authKey);
+		await createTransaction(this.config.productionMode, args, this.config!);
 
 	/**
 	 * @param {string} orderID - Transaction id from charge response
@@ -107,9 +115,9 @@ export class MidtransNode {
 		grossAmount?: number
 	): Promise<ITransaction | ITransactionFail> =>
 		await captureTransaction(
-			this.isProduction,
+			this.config.productionMode,
 			orderID,
-			this.authKey,
+			this.config.authKey,
 			grossAmount
 		);
 
@@ -120,7 +128,11 @@ export class MidtransNode {
 	public cancelTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await cancelTransaction(this.isProduction, orderID, this.authKey);
+		await cancelTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -129,7 +141,11 @@ export class MidtransNode {
 	public approveTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await approveTransaction(this.isProduction, orderID, this.authKey);
+		await approveTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -138,7 +154,11 @@ export class MidtransNode {
 	public denyTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await denyTransaction(this.isProduction, orderID, this.authKey);
+		await denyTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -149,7 +169,12 @@ export class MidtransNode {
 		orderID: string,
 		args: IRefundObjRequest
 	): Promise<IRefundObj | ITransactionFail> =>
-		await refundTransaction(this.isProduction, orderID, args, this.authKey);
+		await refundTransaction(
+			this.config.productionMode,
+			orderID,
+			args,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -158,7 +183,11 @@ export class MidtransNode {
 	public directRefundTransaction = async (
 		orderID: string
 	): Promise<IRefundObj | ITransactionFail> =>
-		await directRefundTransaction(this.isProduction, orderID, this.authKey);
+		await directRefundTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -167,7 +196,11 @@ export class MidtransNode {
 	public statusTransaction = async (
 		orderID: string
 	): Promise<ITransactionStatus | ITransactionFail> =>
-		await statusTransaction(this.isProduction, orderID, this.authKey);
+		await statusTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -188,11 +221,11 @@ export class MidtransNode {
 		| undefined
 	> =>
 		await statusB2bTransaction(
-			this.isProduction,
+			this.config.productionMode,
 			orderID,
 			page,
 			perPage,
-			this.authKey
+			this.config.authKey
 		);
 
 	/**
@@ -202,7 +235,7 @@ export class MidtransNode {
 	public registerCard = async (
 		args: IRegisterCardRequest
 	): Promise<IRegisterCardResponse | undefined> =>
-		await registerCard(this.isProduction, args, this.authKey);
+		await registerCard(this.config.productionMode, args, this.config.authKey);
 
 	/**
 	 * @param {string} tokenId - Card Token
@@ -213,7 +246,12 @@ export class MidtransNode {
 		tokenId: string,
 		grossAmount?: number
 	): Promise<IPointInquiry | undefined> =>
-		await pointInquiry(this.isProduction, tokenId, this.authKey, grossAmount);
+		await pointInquiry(
+			this.config.productionMode,
+			tokenId,
+			this.config.authKey,
+			grossAmount
+		);
 
 	/**
 	 * @param {string} orderID - Transaction ID given by Midtrans
@@ -222,16 +260,25 @@ export class MidtransNode {
 	public expireTransaction = async (
 		orderID: string
 	): Promise<ITransaction | ITransactionFail> =>
-		await expireTransaction(this.isProduction, orderID, this.authKey);
+		await expireTransaction(
+			this.config.productionMode,
+			orderID,
+			this.config.authKey
+		);
 
 	/**
+	 *
 	 * @param {ICreatePayAccount} args - Pay Account Request Object
 	 * @description More info: https://api-docs.midtrans.com/#create-pay-account
 	 */
 	public createPayAccount = async (
 		args: ICreatePayAccount
 	): Promise<ICreatePayAccountResponse | undefined> =>
-		await createPayAccount(this.isProduction, args, this.authKey);
+		await createPayAccount(
+			this.config.productionMode,
+			args,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} accountID - Pay Account ID
@@ -240,7 +287,11 @@ export class MidtransNode {
 	public getPayAccount = async (
 		accountID: string
 	): Promise<IPayAccount | undefined> =>
-		await getPayAccount(this.isProduction, accountID, this.authKey);
+		await getPayAccount(
+			this.config.productionMode,
+			accountID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} accountID - Pay Account ID
@@ -249,7 +300,11 @@ export class MidtransNode {
 	public unbindPayAccount = async (
 		accountID: string
 	): Promise<IPayAccountUnBind | undefined> =>
-		await unbindPayAccount(this.isProduction, accountID, this.authKey);
+		await unbindPayAccount(
+			this.config.productionMode,
+			accountID,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {number} binNumber - Bin ID want to check.
@@ -258,7 +313,11 @@ export class MidtransNode {
 	public getBin = async (
 		binNumber: number
 	): Promise<BinApiResponse | undefined> =>
-		await getBinNumber(this.isProduction, binNumber, this.authKey);
+		await getBinNumber(
+			this.config.productionMode,
+			binNumber,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {ICreateSubcription} args - Subscription Request object.
@@ -267,7 +326,11 @@ export class MidtransNode {
 	public createSubscription = async (
 		args: ICreateSubcription
 	): Promise<ISubcription | undefined> =>
-		await createSubscription(this.isProduction, args, this.authKey);
+		await createSubscription(
+			this.config.productionMode,
+			args,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -276,7 +339,11 @@ export class MidtransNode {
 	public getSubscription = async (
 		subscriptionId: string
 	): Promise<ISubcription | undefined> =>
-		await getSubscription(this.isProduction, subscriptionId, this.authKey);
+		await getSubscription(
+			this.config.productionMode,
+			subscriptionId,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -288,10 +355,10 @@ export class MidtransNode {
 		args: IUpdateSubcription
 	): Promise<ISubcription | undefined> =>
 		await updateSubscription(
-			this.isProduction,
+			this.config.productionMode,
 			subscriptionId,
 			args,
-			this.authKey
+			this.config.authKey
 		);
 
 	/**
@@ -301,7 +368,11 @@ export class MidtransNode {
 	public disableSubscription = async (
 		subscriptionId: string
 	): Promise<{ status_message: string } | undefined> =>
-		await disableSubscription(this.isProduction, subscriptionId, this.authKey);
+		await disableSubscription(
+			this.config.productionMode,
+			subscriptionId,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} subscriptionId - Subscription ID given by Midtrans
@@ -310,13 +381,17 @@ export class MidtransNode {
 	public enableSubscription = async (
 		subscriptionId: string
 	): Promise<{ status_message: string } | undefined> =>
-		await enableSubscription(this.isProduction, subscriptionId, this.authKey);
+		await enableSubscription(
+			this.config.productionMode,
+			subscriptionId,
+			this.config.authKey
+		);
 
 	/**
 	 * @description Returns pong message for monitoring purpose
 	 */
 	public ping = async (): Promise<string | undefined> =>
-		await ping(this.isProduction, this.authKey);
+		await ping(this.config.productionMode, this.config.authKey);
 
 	/**
 	 * @param {IBeneficiaries} args - Beneficiaries request object
@@ -325,7 +400,11 @@ export class MidtransNode {
 	public createBeneficiaries = async (
 		args: IBeneficiaries
 	): Promise<ISuccessBeneficiaries | undefined> =>
-		await createBeneficiaries(this.isProduction, args, this.authKey);
+		await createBeneficiaries(
+			this.config.productionMode,
+			args,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {string} aliasName - Identifier name.
@@ -336,16 +415,25 @@ export class MidtransNode {
 		aliasName: string,
 		args: IBeneficiaries
 	): Promise<ISuccessBeneficiaries | undefined> =>
-		await updateBeneficiaries(this.isProduction, aliasName, args, this.authKey);
+		await updateBeneficiaries(
+			this.config.productionMode,
+			aliasName,
+			args,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {number} limit - Limit data beneficiaries.
 	 * @description Use this API to fetch list of all beneficiaries saved in Iris Portal. More info: https://iris-docs.midtrans.com/#list-beneficiaries
 	 */
 	public listBeneficiaries = async (
-		limit = 10
+		limit: number = 10
 	): Promise<IBeneficiaries[] | undefined> =>
-		await listBeneficiaries(this.isProduction, limit, this.authKey);
+		await listBeneficiaries(
+			this.config.productionMode,
+			limit,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {IPayoutRequest} args - Payout request object.
@@ -354,7 +442,7 @@ export class MidtransNode {
 	public createPayouts = async (
 		args: IPayoutRequest
 	): Promise<IPayoutCreateResponse | undefined> =>
-		await createPayouts(this.isProduction, args, this.authKey);
+		await createPayouts(this.config.productionMode, args, this.config.authKey);
 
 	/**
 	 * @param {IPayoutApproveRequest} args - Payout approve request object
@@ -363,7 +451,7 @@ export class MidtransNode {
 	public approvePayouts = async (
 		args: IPayoutApproveRequest
 	): Promise<IPayoutSuccessAct | undefined> =>
-		await approvePayouts(this.isProduction, args, this.authKey);
+		await approvePayouts(this.config.productionMode, args, this.config.authKey);
 
 	/**
 	 * @param {IPayoutRejectRequest} args - Payout reject request object
@@ -372,7 +460,7 @@ export class MidtransNode {
 	public rejectPayouts = async (
 		args: IPayoutRejectRequest
 	): Promise<IPayoutSuccessAct | undefined> =>
-		await rejectPayouts(this.isProduction, args, this.authKey);
+		await rejectPayouts(this.config.productionMode, args, this.config.authKey);
 
 	/**
 	 * @param {string} refNo - Unique reference_no of a payout
@@ -381,7 +469,11 @@ export class MidtransNode {
 	public getPayoutDetails = async (
 		refNo: string
 	): Promise<IPayout | undefined> =>
-		await getPayoutDetails(this.isProduction, refNo, this.authKey);
+		await getPayoutDetails(
+			this.config.productionMode,
+			refNo,
+			this.config.authKey
+		);
 
 	/**
 	 * @param {IStatementDate} fromDate - start date range for payouts (YYYY-MM-DD)
@@ -392,20 +484,25 @@ export class MidtransNode {
 		fromDate?: IStatementDate,
 		toDate?: IStatementDate
 	): Promise<IStatementResult[] | undefined> =>
-		await historyTransaction(this.isProduction, this.authKey, fromDate, toDate);
+		await historyTransaction(
+			this.config.productionMode,
+			this.config.authKey,
+			fromDate,
+			toDate
+		);
 
 	/**
 	 * @description Provide top up information channel for Aggregator Partner
 	 */
 	public topupChannels = async (): Promise<
 		ITopupAggreratorChannel[] | undefined
-	> => await topupChannels(this.isProduction, this.authKey);
+	> => await topupChannels(this.config.productionMode, this.config.authKey);
 
 	/**
 	 * @description Show list of registered bank accounts for facilitator partner. More info: https://iris-docs.midtrans.com/#bank-accounts-facilitator
 	 */
 	public bankAccounts = async (): Promise<BankAccount[] | undefined> =>
-		await bankAccounts(this.isProduction, this.authKey);
+		await bankAccounts(this.config.productionMode, this.config.authKey);
 
 	/**
 	 * @param {string} bankAccountID - Bank account ID to be used when creating payouts
@@ -414,13 +511,17 @@ export class MidtransNode {
 	public checkBankBalance = async (
 		bankAccountID: string
 	): Promise<ICheckBalanceBank | undefined> =>
-		await checkBankBalance(this.isProduction, bankAccountID, this.authKey);
+		await checkBankBalance(
+			this.config.productionMode,
+			bankAccountID,
+			this.config.authKey
+		);
 
 	/**
 	 * @description - Show list of supported banks in IRIS. More info: https://iris-docs.midtrans.com/#list-banks
 	 */
 	public listBanks = async (): Promise<BeneficiaryBank[] | undefined> =>
-		await beneficiaryBanks(this.isProduction, this.authKey);
+		await beneficiaryBanks(this.config.productionMode, this.config.authKey);
 
 	/**
 	 * @param {string} bankName - Bank code
@@ -432,17 +533,28 @@ export class MidtransNode {
 		accountID: string
 	): Promise<IValidateBankResult | undefined> =>
 		await validateBankAccount(
-			this.isProduction,
+			this.config.productionMode,
 			bankName,
 			accountID,
-			this.authKey
+			this.config.authKey
 		);
 
+	/**
+	 * Charge transaction.
+	 *
+	 * @param {IChargeTransactionArgs} args Charge transaction arguments/
+	 * @return {Promise<IChargeTransactionResult | undefined>}
+	 */
 	public chargeTransaction = async (
 		args: IChargeTransactionArgs
 	): Promise<IChargeTransactionResult | undefined> =>
-		await chargeTransaction(this.isProduction, args, this.authKey);
+		await chargeTransaction(
+			this.config.productionMode,
+			args,
+			this.config.authKey
+		);
 }
 
 export default MidtransNode;
 export * from './Interfaces';
+export * from './Util/Utility';

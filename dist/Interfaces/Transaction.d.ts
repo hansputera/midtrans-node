@@ -1,4 +1,7 @@
 import type { SnapTransaction } from './SnapTransaction';
+/**
+ * Payment Type.
+ */
 export declare type PaymentType =
 	| 'gopay'
 	| 'shopeepay'
@@ -18,6 +21,9 @@ export declare type PaymentType =
 	| 'bni_va'
 	| 'bri_va'
 	| 'indomaret';
+/**
+ * Transaction status.
+ */
 export declare type TransactionStatus =
 	| 'authorize'
 	| 'capture'
@@ -31,13 +37,22 @@ export declare type TransactionStatus =
 	| 'partial_chargeback'
 	| 'expire'
 	| 'failure';
+/**
+ * Fraud Status
+ */
 export declare type FraudStatus = 'accept' | 'deny' | 'challenge';
+/**
+ * ActionMethod.
+ */
 export declare type ActionMethod =
 	| 'GET'
 	| 'POST'
 	| 'DELETE'
 	| 'PUT'
 	| 'OPTIONS';
+/**
+ * Unit expiry.
+ */
 export declare type UnitExpiry = 'second' | 'minute' | 'hour' | 'day';
 export interface IRefund {
 	refund_chargeback_id: number;

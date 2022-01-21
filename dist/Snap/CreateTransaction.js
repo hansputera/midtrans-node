@@ -47,9 +47,9 @@ const SnapRequest_1 = require('../Util/SnapRequest');
  * @description create a transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {SnapTransaction} args create transaction arguments.
- * @param {?string} token midtrans server key
+ * @param {IConfig} cfg midtrans config
  */
-function createTransaction(isProduction, args, token) {
+function createTransaction(isProduction, args, cfg) {
 	var _a;
 	return __awaiter(this, void 0, void 0, function* () {
 		try {
@@ -63,8 +63,18 @@ function createTransaction(isProduction, args, token) {
 			}
 			const { data } = yield (0, SnapRequest_1.snapRequest)(
 				isProduction,
-				token
-			).post('/transactions', args);
+				cfg.authKey
+			).post('/transactions', args, {
+				headers: cfg.overrideNotificationUrls
+					? {
+							'X-Override-Notification': Array.isArray(
+								cfg.overrideNotificationUrls
+							)
+								? cfg.overrideNotificationUrls.join(',')
+								: cfg.overrideNotificationUrls,
+					  }
+					: {},
+			});
 			return data;
 		} catch (e) {
 			throw new MidtransNodeError_1.default(

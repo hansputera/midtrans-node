@@ -2,17 +2,18 @@ import type { SnapTransaction } from '../Interfaces/SnapTransaction';
 import MidtransNodeError from '../Util/MidtransNodeError';
 import { snapRequest } from '../Util/SnapRequest';
 import type { AxiosError } from 'axios';
+import { IConfig } from '../Interfaces';
 
 /**
  * @description create a transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {SnapTransaction} args create transaction arguments.
- * @param {?string} token midtrans server key
+ * @param {IConfig} cfg midtrans config
  */
 export async function createTransaction(
 	isProduction: boolean,
 	args: SnapTransaction,
-	token: string
+	cfg: IConfig
 ): Promise<{ token: string; redirect_url: string } | undefined> {
 	try {
 		if (args.item_details && Array.isArray(args.item_details)) {
@@ -23,7 +24,17 @@ export async function createTransaction(
 			}));
 		}
 		const { data }: { data: { token: string; redirect_url: string } } =
-			await snapRequest(isProduction, token).post('/transactions', args);
+			await snapRequest(isProduction, cfg.authKey).post('/transactions', args, {
+				headers: cfg.overrideNotificationUrls
+					? {
+							'X-Override-Notification': Array.isArray(
+								cfg.overrideNotificationUrls
+							)
+								? cfg.overrideNotificationUrls.join(',')
+								: cfg.overrideNotificationUrls,
+					  }
+					: {},
+			});
 		return data;
 	} catch (e) {
 		throw new MidtransNodeError(

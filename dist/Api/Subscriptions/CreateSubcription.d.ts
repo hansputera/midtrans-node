@@ -6,7 +6,7 @@ import type {
  * @description Create a subscription
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {ICreateSubcription} args Create subscription args
- * @param {string} token Midtrans server key
+ * @param {string} token midtrans server key
  */
 export declare function createSubscription(
 	isProduction: boolean,

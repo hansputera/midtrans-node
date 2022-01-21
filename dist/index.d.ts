@@ -33,13 +33,13 @@ import type {
 	IValidateBankResult,
 	IChargeTransactionArgs,
 	IChargeTransactionResult,
+	IConfig,
 } from './Interfaces';
 /**
  * @class MidtransNode
  */
 export declare class MidtransNode {
-	isProduction: boolean;
-	authKey: string;
+	config: IConfig;
 	/**
 	 * @param {boolean} isProduction Are you ready to production?
 	 * @param {string} authKey Your midtrans server-key
@@ -151,6 +151,7 @@ export declare class MidtransNode {
 		orderID: string
 	) => Promise<ITransaction | ITransactionFail>;
 	/**
+	 *
 	 * @param {ICreatePayAccount} args - Pay Account Request Object
 	 * @description More info: https://api-docs.midtrans.com/#create-pay-account
 	 */
@@ -305,9 +306,16 @@ export declare class MidtransNode {
 		bankName: string,
 		accountID: string
 	) => Promise<IValidateBankResult | undefined>;
+	/**
+	 * Charge transaction.
+	 *
+	 * @param {IChargeTransactionArgs} args Charge transaction arguments/
+	 * @return {Promise<IChargeTransactionResult | undefined>}
+	 */
 	chargeTransaction: (
 		args: IChargeTransactionArgs
 	) => Promise<IChargeTransactionResult | undefined>;
 }
 export default MidtransNode;
 export * from './Interfaces';
+export * from './Util/Utility';

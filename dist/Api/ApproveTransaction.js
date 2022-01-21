@@ -47,7 +47,7 @@ const MidtransNodeError_1 = __importDefault(
  * @description Approve an unpaid transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} orderID Transaction order id
- * @param {string} token midtrans server key
+ * @param {string} token midtrans auth key
  */
 function approveTransaction(isProduction, orderID, token) {
 	var _a;

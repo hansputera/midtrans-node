@@ -47,7 +47,7 @@ const MidtransNodeError_1 = __importDefault(
  * @description Disable a subscription
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} subscriptionId subscription id want to disable
- * @param {token} token midtrans server key
+ * @param {string} token midtrans auth key
  */
 function disableSubscription(isProduction, subscriptionId, token) {
 	var _a;

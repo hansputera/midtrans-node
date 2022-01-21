@@ -7,7 +7,7 @@ import type { AxiosError } from 'axios';
  * @description Get a subscription detail
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} subscriptionId subscription id want to disable
- * @param {token} token midtrans server key
+ * @param {string} token midtrans server key
  */
 export async function getSubscription(
 	isProduction: boolean,

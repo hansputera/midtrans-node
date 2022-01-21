@@ -1,14 +1,15 @@
 import type { SnapTransaction } from '../Interfaces/SnapTransaction';
+import { IConfig } from '../Interfaces';
 /**
  * @description create a transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {SnapTransaction} args create transaction arguments.
- * @param {?string} token midtrans server key
+ * @param {IConfig} cfg midtrans config
  */
 export declare function createTransaction(
 	isProduction: boolean,
 	args: SnapTransaction,
-	token: string
+	cfg: IConfig
 ): Promise<
 	| {
 			token: string;

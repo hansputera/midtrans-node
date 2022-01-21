@@ -88,11 +88,11 @@ const plussDate = (date, days) => {
 	return struPlusDate;
 };
 const validDate = (d) => {
-	const date_d = new Date();
-	if (d.year !== date_d.getFullYear() || !/[0-9]/g.test(d.year.toString())) {
+	const dateD = new Date();
+	if (d.year !== dateD.getFullYear() || !/[0-9]/g.test(d.year.toString())) {
 		throw new MidtransNodeError_1.default('Invalid year date');
 	}
-	const month = date_d.getMonth() + 1;
+	const month = dateD.getMonth() + 1;
 	if (d.month > month || !/[0-9]/g.test(d.month.toString()))
 		throw new MidtransNodeError_1.default('Invalid Month date');
 	else if (!/[0-9]/g.test(d.days.toString()))
