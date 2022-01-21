@@ -27,7 +27,7 @@
     "luxon": "^2.3.0"
   },
   "scripts": {
-    "build": "rimraf compiles && tsc --build tsconfig.json",
+    "build": "rimraf dist && tsc --build tsconfig.json",
     "lint": "eslint \"./src/**/*.ts\" --fix",
     "test": "mocha",
     "prepare": "husky install",
