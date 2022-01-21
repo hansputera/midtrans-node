@@ -97,6 +97,16 @@ export class MidtransNode {
 	}
 
 	/**
+	 * Set override notification url.
+	 * @param {string[] | string} urls Website URL(s)
+	 * @return {MidtransNode}
+	 */
+	public setOverrideNotificationURL(urls: string[] | string): MidtransNode {
+		this.config.overrideNotificationUrls = urls;
+		return this;
+	}
+
+	/**
 	 * @param {SnapTransaction} args - Create Transaction Arguments.
 	 * @description More info: https://snap-docs.midtrans.com
 	 */
