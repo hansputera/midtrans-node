@@ -5,8 +5,4 @@ import type { IPayout } from '../Interfaces/Payouts';
  * @param {string} refNo Payout reference number.
  * @param {string} token midtrans server key
  */
-export declare function getPayoutDetails(
-	isProduction: boolean,
-	refNo: string,
-	token: string
-): Promise<IPayout | undefined>;
+export declare function getPayoutDetails(isProduction: boolean, refNo: string, token: string): Promise<IPayout | undefined>;

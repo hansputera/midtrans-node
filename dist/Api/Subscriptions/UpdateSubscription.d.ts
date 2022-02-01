@@ -6,9 +6,4 @@ import type { IUpdateSubcription, ISubcription } from '../../Interfaces';
  * @param {IUpdateSubcription} args update subscription arguments
  * @param {string} token midtrans auth key
  */
-export declare function updateSubscription(
-	isProduction: boolean,
-	subscriptionId: string,
-	args: IUpdateSubcription,
-	token: string
-): Promise<ISubcription | undefined>;
+export declare function updateSubscription(isProduction: boolean, subscriptionId: string, args: IUpdateSubcription, token: string): Promise<ISubcription | undefined>;

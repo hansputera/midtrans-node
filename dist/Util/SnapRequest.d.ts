@@ -6,8 +6,4 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios';
  * @param {AxiosRequestConfig} options Axios Options
  * @return {AxiosInstance}
  */
-export declare function snapRequest(
-	production: boolean,
-	token: string,
-	options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>
-): AxiosInstance;
+export declare function snapRequest(production: boolean, token: string, options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>): AxiosInstance;

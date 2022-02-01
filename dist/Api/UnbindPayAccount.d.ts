@@ -5,8 +5,4 @@ import type { IPayAccountUnBind } from '../Interfaces';
  * @param {string} accountID Pay Account ID
  * @param {string} token midtrans server key
  */
-export declare function unbindPayAccount(
-	isProduction: boolean,
-	accountID: string,
-	token: string
-): Promise<IPayAccountUnBind | undefined>;
+export declare function unbindPayAccount(isProduction: boolean, accountID: string, token: string): Promise<IPayAccountUnBind | undefined>;

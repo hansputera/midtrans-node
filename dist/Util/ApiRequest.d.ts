@@ -7,9 +7,4 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios';
  * @param {AxiosRequestConfig} options Axios options
  * @return {AxiosInstance}
  */
-export declare function apiRequest(
-	production: boolean,
-	versionApi: string | undefined,
-	token: string,
-	options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>
-): AxiosInstance;
+export declare function apiRequest(production: boolean, versionApi: string | undefined, token: string, options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>): AxiosInstance;

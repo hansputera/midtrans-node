@@ -5,8 +5,4 @@ import type { IRefundObj, ITransactionFail } from '../Interfaces';
  * @param {string} orderID Transaction order id
  * @param {string} token midtrans server key
  */
-export declare function directRefundTransaction(
-	isProduction: boolean,
-	orderID: string,
-	token: string
-): Promise<IRefundObj | ITransactionFail>;
+export declare function directRefundTransaction(isProduction: boolean, orderID: string, token: string): Promise<IRefundObj | ITransactionFail>;

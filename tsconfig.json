@@ -13,6 +13,6 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true
     },
-    "exclude": ["node_modules"],
-    "include": ["src/**/*", "docs/**/*"]
+    "exclude": ["node_modules", "docs"],
+    "include": ["src/**/*"]
 } 

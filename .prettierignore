@@ -6,3 +6,4 @@ docs
 .mocharc.js
 *.md
 *.json
+dist

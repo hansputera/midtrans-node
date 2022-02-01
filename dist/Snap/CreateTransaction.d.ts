@@ -6,14 +6,7 @@ import { IConfig } from '../Interfaces';
  * @param {SnapTransaction} args create transaction arguments.
  * @param {IConfig} cfg midtrans config
  */
-export declare function createTransaction(
-	isProduction: boolean,
-	args: SnapTransaction,
-	cfg: IConfig
-): Promise<
-	| {
-			token: string;
-			redirect_url: string;
-	  }
-	| undefined
->;
+export declare function createTransaction(isProduction: boolean, args: SnapTransaction, cfg: IConfig): Promise<{
+    token: string;
+    redirect_url: string;
+} | undefined>;

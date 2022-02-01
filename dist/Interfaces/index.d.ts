@@ -14,22 +14,22 @@ export * from './Payouts';
  * Configuration interface.
  */
 export interface IConfig {
-	/**
-	 * Are you ready to production mode?
-	 * Set to `true` if you are ready.
-	 * And, set it to `false` if you want use sandbox mode.
-	 */
-	productionMode: boolean;
-	/**
-	 * Custom Notification URLs.
-	 * It could be an array or just a string.
-	 * Make sure the URL is active or ready to receive requests from midtrans.
-	 *
-	 * @api snap
-	 */
-	overrideNotificationUrls?: string[] | string;
-	/**
-	 * Server authentication key.
-	 */
-	authKey: string;
+    /**
+     * Are you ready to production mode?
+     * Set to `true` if you are ready.
+     * And, set it to `false` if you want use sandbox mode.
+     */
+    productionMode: boolean;
+    /**
+     * Custom Notification URLs.
+     * It could be an array or just a string.
+     * Make sure the URL is active or ready to receive requests from midtrans.
+     *
+     * @api snap
+     */
+    overrideNotificationUrls?: string[] | string;
+    /**
+     * Server authentication key.
+     */
+    authKey: string;
 }

@@ -6,9 +6,4 @@ import type { ITransaction, ITransactionFail } from '../Interfaces';
  * @param {string} token midtrans auth key
  * @param {number?} grossAmount Gross amount from a transaction
  */
-export declare function captureTransaction(
-	isProduction: boolean,
-	orderID: string,
-	token: string,
-	grossAmount?: number
-): Promise<ITransaction | ITransactionFail>;
+export declare function captureTransaction(isProduction: boolean, orderID: string, token: string, grossAmount?: number): Promise<ITransaction | ITransactionFail>;

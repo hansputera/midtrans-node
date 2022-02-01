@@ -6,9 +6,4 @@ import type { IPointInquiry } from '../Interfaces';
  * @param {string} token midtrans server key
  * @param {?number} grossAmount Gross amount
  */
-export declare function pointInquiry(
-	isProduction: boolean,
-	tokenId: string,
-	token: string,
-	grossAmount?: number
-): Promise<IPointInquiry | undefined>;
+export declare function pointInquiry(isProduction: boolean, tokenId: string, token: string, grossAmount?: number): Promise<IPointInquiry | undefined>;

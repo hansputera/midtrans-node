@@ -1,8 +1,4 @@
-import type {
-	IRefundObj,
-	IRefundObjRequest,
-	ITransactionFail,
-} from '../Interfaces';
+import type { IRefundObj, IRefundObjRequest, ITransactionFail } from '../Interfaces';
 /**
  * @description Refund a paid transaction
  * @param {boolean} isProduction Production/Sandbox mode
@@ -10,9 +6,4 @@ import type {
  * @param {IRefundObjRequest} args refund transaction arguments
  * @param {string} token midtrans server key
  */
-export declare function refundTransaction(
-	isProduction: boolean,
-	orderID: string,
-	args: IRefundObjRequest,
-	token: string
-): Promise<IRefundObj | ITransactionFail>;
+export declare function refundTransaction(isProduction: boolean, orderID: string, args: IRefundObjRequest, token: string): Promise<IRefundObj | ITransactionFail>;

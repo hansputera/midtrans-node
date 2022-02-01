@@ -6,8 +6,4 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios';
  * @param {AxiosRequestConfig} options Axios options
  * @return {AxiosInstance}
  */
-export declare function irisRequest(
-	isProduction: boolean,
-	token: string,
-	options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>
-): AxiosInstance;
+export declare function irisRequest(isProduction: boolean, token: string, options?: Omit<AxiosRequestConfig, 'baseURL' | 'auth'>): AxiosInstance;

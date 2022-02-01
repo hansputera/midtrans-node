@@ -7,17 +7,8 @@ import type { ITransaction } from '../Interfaces';
  * @param {?number} perPage how much data per page.
  * @param {string} token midtrans server key
  */
-export declare function statusB2bTransaction(
-	isProduction: boolean,
-	orderID: string,
-	page: number | undefined,
-	perPage: number | undefined,
-	token: string
-): Promise<
-	| {
-			status_code: string;
-			status_message: string;
-			transactions: ITransaction[];
-	  }
-	| undefined
->;
+export declare function statusB2bTransaction(isProduction: boolean, orderID: string, page: number | undefined, perPage: number | undefined, token: string): Promise<{
+    status_code: string;
+    status_message: string;
+    transactions: ITransaction[];
+} | undefined>;

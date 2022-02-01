@@ -5,8 +5,4 @@ import type { ICheckBalanceBank } from '../Interfaces';
  * @param {string} bankAccountId A bank account id
  * @param {string} token midtrans server key
  */
-export declare function checkBankBalance(
-	isProduction: boolean,
-	bankAccountId: string,
-	token: string
-): Promise<ICheckBalanceBank | undefined>;
+export declare function checkBankBalance(isProduction: boolean, bankAccountId: string, token: string): Promise<ICheckBalanceBank | undefined>;
