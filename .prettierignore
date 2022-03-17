@@ -1,7 +1,9 @@
 compiles
 node_modules
 tests
+docs
 .github
 .mocharc.js
 *.md
 *.json
+dist

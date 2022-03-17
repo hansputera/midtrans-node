@@ -5,8 +5,4 @@ import type { IPayAccount } from '../Interfaces';
  * @param {string} accountID Pay Account ID
  * @param {string} token midtrans server key
  */
-export declare function getPayAccount(
-	isProduction: boolean,
-	accountID: string,
-	token: string
-): Promise<IPayAccount | undefined>;
+export declare function getPayAccount(isProduction: boolean, accountID: string, token: string): Promise<IPayAccount | undefined>;

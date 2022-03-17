@@ -4,11 +4,6 @@ import type { IUpdateSubcription, ISubcription } from '../../Interfaces';
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} subscriptionId subscription id want to disable
  * @param {IUpdateSubcription} args update subscription arguments
- * @param {token} token midtrans server key
+ * @param {string} token midtrans auth key
  */
-export declare function updateSubscription(
-	isProduction: boolean,
-	subscriptionId: string,
-	args: IUpdateSubcription,
-	token: string
-): Promise<ISubcription | undefined>;
+export declare function updateSubscription(isProduction: boolean, subscriptionId: string, args: IUpdateSubcription, token: string): Promise<ISubcription | undefined>;

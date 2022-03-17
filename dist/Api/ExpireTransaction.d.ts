@@ -5,8 +5,4 @@ import type { ITransaction, ITransactionFail } from '../Interfaces';
  * @param {string} orderID Transaction order id
  * @param {string} token midtrans server key
  */
-export declare function expireTransaction(
-	isProduction: boolean,
-	orderID: string,
-	token: string
-): Promise<ITransaction | ITransactionFail>;
+export declare function expireTransaction(isProduction: boolean, orderID: string, token: string): Promise<ITransaction | ITransactionFail>;

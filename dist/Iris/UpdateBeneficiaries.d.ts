@@ -6,9 +6,4 @@ import type { IBeneficiaries, ISuccessBeneficiaries } from '../Interfaces';
  * @param {IBeneficiaries} args update beneficiaries arguments.
  * @param {string} token midtrans server key
  */
-export declare function updateBeneficiaries(
-	isProduction: boolean,
-	aliasName: string,
-	args: IBeneficiaries,
-	token: string
-): Promise<ISuccessBeneficiaries | undefined>;
+export declare function updateBeneficiaries(isProduction: boolean, aliasName: string, args: IBeneficiaries, token: string): Promise<ISuccessBeneficiaries | undefined>;

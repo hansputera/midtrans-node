@@ -10,7 +10,7 @@ import type { AxiosError } from 'axios';
  * @description Create a subscription
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {ICreateSubcription} args Create subscription args
- * @param {string} token Midtrans server key
+ * @param {string} token midtrans server key
  */
 export async function createSubscription(
 	isProduction: boolean,

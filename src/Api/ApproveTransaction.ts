@@ -7,7 +7,7 @@ import type { AxiosError } from 'axios';
  * @description Approve an unpaid transaction
  * @param {boolean} isProduction Production/Sandbox mode
  * @param {string} orderID Transaction order id
- * @param {string} token midtrans server key
+ * @param {string} token midtrans auth key
  */
 export async function approveTransaction(
 	isProduction: boolean,

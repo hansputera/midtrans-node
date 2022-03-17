@@ -6,9 +6,4 @@ import type { IValidateBankResult } from '../Interfaces';
  * @param {string} bankAccountId A bank account id
  * @param {string} token midtrans server key
  */
-export declare function validateBankAccount(
-	isProduction: boolean,
-	bankName: string,
-	bankAccountId: string,
-	token: string
-): Promise<IValidateBankResult | undefined>;
+export declare function validateBankAccount(isProduction: boolean, bankName: string, bankAccountId: string, token: string): Promise<IValidateBankResult | undefined>;
