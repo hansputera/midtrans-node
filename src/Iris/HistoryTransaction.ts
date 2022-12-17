@@ -4,14 +4,6 @@ import { irisRequest } from '../Util/IrisRequest';
 import MidtransNodeError from '../Util/MidtransNodeError';
 import type { AxiosError } from 'axios';
 
-const date = new Date();
-const struDate: IStatementDate = {
-	year: date.getFullYear(),
-	month: date.getMonth() + 1,
-	days: date.getDate(),
-	_date: DateTime.now(),
-};
-
 const minusDate = (date?: IStatementDate, days?: number) => {
 	let minDate: DateTime | undefined;
 	if (!date) minDate = DateTime.now().minus({ days });
@@ -76,6 +68,14 @@ export async function historyTransaction(
 	fromDate?: IStatementDate,
 	toDate?: IStatementDate
 ): Promise<IStatementResult[]> {
+	const date = new Date();
+	const struDate: IStatementDate = {
+		year: date.getFullYear(),
+		month: date.getMonth() + 1,
+		days: date.getDate(),
+		_date: DateTime.now(),
+	};
+
 	if (!fromDate && !toDate) {
 		fromDate = struDate;
 		toDate = minusDate(struDate, 10);
