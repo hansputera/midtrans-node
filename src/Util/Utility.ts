@@ -1,4 +1,4 @@
-import { sha256 } from 'sha.js';
+import { sha256 as SHA256 } from 'sha.js';
 
 /**
  * @class MidtransUtility
@@ -26,7 +26,7 @@ export class MidtransUtility {
 			throw new TypeError('The authKey must be a string!');
 		}
 
-		return new sha256()
+		return new SHA256()
 			.update(`${orderId}${statusCode}${grossAmount}${authKey}`)
 			.digest('hex');
 	}
