@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/luxon": "^3.1.0",
     "@types/node": "^16.11.12",
+    "@types/sha.js": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "eslint": "^8.4.1",
@@ -24,7 +25,8 @@
   },
   "dependencies": {
     "axios": "^1.2.1",
-    "luxon": "^3.1.1"
+    "luxon": "^3.1.1",
+    "sha.js": "^2.4.11"
   },
   "scripts": {
     "build": "rimraf dist && tsc --build tsconfig.json",

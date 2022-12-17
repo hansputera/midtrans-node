@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import { sha256 } from 'sha.js';
 
 /**
  * @class MidtransUtility
@@ -25,8 +25,8 @@ export class MidtransUtility {
 		} else if (typeof authKey !== 'string') {
 			throw new TypeError('The authKey must be a string!');
 		}
-		return crypto
-			.createHash('sha512')
+
+		return new sha256()
 			.update(`${orderId}${statusCode}${grossAmount}${authKey}`)
 			.digest('hex');
 	}
